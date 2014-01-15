@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="script.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+	<title>TicTacToe</title>
+</head>
+<!-- <body style="font-family: Arial" onload="initEvents()" x-ng-app="" x-ng-init="board=[[0,1,2],[3,4,5],[6,7,8]]; tog=0;">
+	<div class="board cf">
+		<div class="row cf" x-ng-repeat="i in board">
+			<div x-ng-class="{p0:tog%2==0, p1:tog%2!=0, cell:tog==0}" x-ng-repeat="j in i track by $index" x-ng-click="tog=tog+1;">
+			</div>
+		</div>
+	</div> -->
+<body style="font-family: Arial" onload="initEvents()" x-ng-app="">
+	<div class="board cf">
+		<div class="row cf" id="r0">
+			<div class="cell" id="0"></div>
+			<div class="cell" id="1"></div>
+			<div class="cell" id="2"></div>
+		</div>
+		<div class="row cf" id="r1">
+			<div class="cell" id="3">
+				<div class="overlayCell selectGame player" onclick="setPlayers(1)"><b>Single</b> Player</div>
+			</div>
+			<div class="cell" id="4">
+				<div class="overlayCell startGame" onclick="selectGame()"><b>Play</b></div>
+				<div class="overlayCell selectGame">Select <b>Game</b></div>
+			</div>
+			<div class="cell" id="5">
+				<div class="overlayCell selectGame player" onclick="setPlayers(2)"><b>Two</b> Player</div>
+			</div>
+		</div>
+		<div class="row cf" id="r2">
+			<div class="cell" id="6"></div>
+			<div class="cell" id="7"></div>
+			<div class="cell" id="8"></div>
+		</div>
+	</div>
+<!-- 	<div>{{ cellNum }}</div>
+	<div>{{ pNum }}</div> -->
+	<div class="spoon"></div>
+	<div class="choco"></div>
+	<div class="overlay">
+		<div class="closeSettings" onclick="closeSettings()"></div>
+		<div class="settings">
+			<form>
+				<input type="radio" name="numPlayers" value="1">1 Player<br />
+				<input type="radio" name="numPlayers" value="2">2 Players<br /><br />
+				<input type="radio" name="macPlayer" value="1">Coconut<br />
+				<input type="radio" name="macPlayer" value="2">Hazelnut
+			</form>
+		</div>
+	</div>
+	<br />
+	<button type="button" onclick="resetAll()">New Game</button>
+	<button type="button" onclick="selectGame()">Settings</button>
+</body>
+</html>
