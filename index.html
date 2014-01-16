@@ -4,18 +4,19 @@
 <head>
 	<link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script type="text/javascript" src="script.js"></script>
+	<!-- // <script type="text/javascript" src="script.js"></script> -->
+	<script type="text/javascript" src="main.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 	<title>TicTacToe</title>
 </head>
-<!-- <body style="font-family: Arial" onload="initEvents()" x-ng-app="" x-ng-init="board=[[0,1,2],[3,4,5],[6,7,8]]; tog=0;">
-	<div class="board cf">
-		<div class="row cf" x-ng-repeat="i in board">
-			<div x-ng-class="{p0:tog%2==0, p1:tog%2!=0, cell:tog==0}" x-ng-repeat="j in i track by $index" x-ng-click="tog=tog+1;">
+<body style="font-family: Arial" x-ng-app="" x-ng-init="xTurn = {val:false}">
+	<div class="board cf" x-ng-controller="Board">
+		<div class="row cf" x-ng-repeat="row in boardArray track by $index">
+			<div x-ng-class="{cell:true, p0:cell=='X', p1:cell=='O'}" x-ng-repeat="cell in row track by $index" x-ng-click="turn(row, $index);">
 			</div>
 		</div>
-	</div> -->
-<body style="font-family: Arial" onload="initEvents()" x-ng-app="">
+	</div>
+<!-- <body style="font-family: Arial" onload="initEvents()" x-ng-app="">
 	<div class="board cf">
 		<div class="row cf" id="r0">
 			<div class="cell" id="0"></div>
@@ -40,8 +41,8 @@
 			<div class="cell" id="8"></div>
 		</div>
 	</div>
-<!-- 	<div>{{ cellNum }}</div>
-	<div>{{ pNum }}</div> -->
+ 	<div>{{ cellNum }}</div>
+	<div>{{ pNum }}</div>
 	<div class="spoon"></div>
 	<div class="choco"></div>
 	<div class="overlay">
@@ -57,6 +58,6 @@
 	</div>
 	<br />
 	<button type="button" onclick="resetAll()">New Game</button>
-	<button type="button" onclick="selectGame()">Settings</button>
+	<button type="button" onclick="selectGame()">Settings</button> -->
 </body>
 </html>
