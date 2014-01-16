@@ -183,3 +183,40 @@ button {
 	margin: 0 auto;
 }
 
+@media (max-width: 700px) and (min-width: 300px) {
+
+.board {
+	width: 304px;
+	height: 304px;
+}
+
+.row{
+	width: 306px;
+	height: 100px;
+}
+
+.cell {
+	width: 100px;
+	height: 100px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+}
+
+.p0 {
+	background-size: 100px 100px;
+}
+
+.p1 {
+	background-size: 100px 100px;
+}
+
+.p0_win {
+	background-size: 100px 100px;
+}
+
+.p1_win {
+	background-size: 100px 100px;
+}
+
+}
+
