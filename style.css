@@ -188,6 +188,7 @@ button {
 .board {
 	width: 304px;
 	height: 304px;
+	margin-top: 50px;
 }
 
 .row{
@@ -216,6 +217,18 @@ button {
 
 .p1_win {
 	background-size: 100px 100px;
+}
+
+.overlayCell {
+	width: 100px;
+	margin-bottom: 2px;
+	margin-right: 2px;
+	font-size: 2em;
+}
+
+.startGame {
+	height: 135px;
+	padding-top: 25px;
 }
 
 }
