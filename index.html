@@ -2,6 +2,7 @@
 
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<!-- // <script type="text/javascript" src="script.js"></script> -->
@@ -9,12 +10,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 	<title>TicTacToe</title>
 </head>
-<body style="font-family: Arial" x-ng-app="" x-ng-init="xTurn = {val:false}">
-	<div class="board cf" x-ng-controller="Board">
-		<div class="row cf" x-ng-repeat="row in boardArray track by $index">
-			<div x-ng-class="{cell:true, p0:cell=='X', p1:cell=='O'}" x-ng-repeat="cell in row track by $index" x-ng-click="turn(row, $index);">
+<body style="font-family: Arial" x-ng-app="" x-ng-init="reset()">
+	<div class="board" x-ng-controller="Board">
+		<div class="row" x-ng-repeat="row in board track by $index">
+			<div class="cell" x-ng-class="{p0:cell=='X', p1:cell=='O'}" x-ng-repeat="cell in row track by $index" x-ng-click="turn($parent.$index, $index);">{{$parent.$index + " " + $index}}
+				<!-- <div x-ng-class="{overlayCell:($index == 1 && $parent.$index == 1),startGame:($index == 1 && $parent.$index == 1)}" x-ng-click="">{{$index == 1 && $parent.$index == 1 ? 'play' : ''}}</div> -->	
 			</div>
 		</div>
+		<button type="button" x-ng-click="reset()">New Game</button>
 	</div>
 <!-- <body style="font-family: Arial" onload="initEvents()" x-ng-app="">
 	<div class="board cf">
