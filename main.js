@@ -1,6 +1,6 @@
 function Board($scope) {
 	$scope.board = [['','',''],['','',''],['','','']];
-	$scope.player = {piece:false, turn:false, win:false};
+	$scope.player = {numOf:2, turn:false, win:false};
 	$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
 	$scope.menu = {overlay:true, play:true, selectGame:false, selectPiece:false};
 
@@ -10,7 +10,8 @@ function Board($scope) {
 	$scope.reset = function() {
 		$scope.board = [['','',''],['','',''],['','','']];
 		$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
-		$scope.player = {piece:false, turn:false, win:false};
+		$scope.player.win = false;
+		$scope.menu.overlay = false;
 	};
 
 	// check turn true or false to set X or O
@@ -20,8 +21,9 @@ function Board($scope) {
 		var b = $scope.board;
 		var p = $scope.player;
 		b[row][col]=(b[row][col]==='' ? ((p.turn = !p.turn) ? 'X':'O') : b[row][col]);
-		aiDemote(row, col);
+		// aiDemote(row, col);
 		checkWin();
+		announceWin();
 	};
 
 	$scope.switchMenu = function() {
@@ -42,6 +44,8 @@ function Board($scope) {
 				}
 			}
 		}
+
+
 	};
 
 	function aiDemote(row, col) {
@@ -51,7 +55,6 @@ function Board($scope) {
 	function checkWin() {
 		var b = $scope.board;
 		var p = $scope.player;
-		// var win = false;
 		for(var i = 0; i < b.length; i++){
 			// horiz win
 			if(!p.win) {
@@ -66,7 +69,11 @@ function Board($scope) {
 				}
 			}
 		}
-		if(p.win)
-			console.log("WIN");
+	}
+
+	function announceWin() {
+		var p = $scope.player;
+		var m = $scope.menu;
+		p.win ? ( (p.turn ? console.log('COCONUT wins') : console.log('HAZELNUT wins')), p.turn = !p.turn, m.overlay = true) : null;
 	}
 }

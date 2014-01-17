@@ -22,8 +22,8 @@
 		<div class="menu select twoPlayer" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}" x-ng-click="switchMenu()"><b>two</b> player</div>
 		<!-- select piece -->
 		<div class="menu select piece" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}">select <b>piece</b></div>
-		<div class="menu select piece1" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="switchMenu()"><b>coconut</b></div>
-		<div class="menu select piece2" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="switchMenu()"><b>hazelnut</b></div>
+		<div class="menu select piece1" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="player.turn=false; switchMenu();"><b>coconut</b></div>
+		<div class="menu select piece2" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
 
 		<div class="spoon"></div>
 		<div class="choco"></div>
