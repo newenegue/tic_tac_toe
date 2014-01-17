@@ -13,7 +13,7 @@
 	<div class="board" x-ng-controller="BoardCtrl">
 
 		<!-- menu -->
-		<div class="overlayMenu" x-ng-class="{hide:!menu.overlay}"></div> 
+		<div class="overlayMenu" x-ng-class="{overlayShow:menu.overlay, overlayHide:!menu.overlay}"></div> 
 		<!-- play -->
 		<div class="menu play" x-ng-class="{show:menu.play, hide:!menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
 		<!-- select game -->
@@ -26,7 +26,10 @@
 		<div class="menu select piece2" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
 		<!-- in game buttons -->
 		<div class="newGame" x-ng-click="reset()" x-ng-class="{show:menu.newGame, hide:!menu.newGame}"><span class="spanText">new</span> <b>game</b></div>
+		<div class="overlaySettings" x-ng-class="{overlayShow:menu.settings, overlayHide:!menu.settings}"></div> 
 		<div class="settings" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame, hide:!menu.newGame, settingsOpen:menu.settings}"><b>settings</b></div>
+		<!-- display result -->
+		<div class="menu draw" x-ng-class="{show:player.draw, hide:!player.draw}"><b>draw</b></div>
 
 		<div class="spoon"></div>
 		<div class="choco"></div>

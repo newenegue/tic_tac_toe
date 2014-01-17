@@ -74,7 +74,7 @@ toggle through menu options
 	z-index: 10;
 	top: 0px;
 	left: 0px;
-	background-color: rgba(255,255,255,0.5);
+	/*background-color: rgba(255,255,255,0.5);*/
 }
 
 .menu {
@@ -217,22 +217,25 @@ toggle through menu options
 	color: rgba(255,80,0,1);
 }
 
-/*.closeSettings {
-	font-size: 15px;
-	height: 15px;
-	width: 40px;
-	padding-top: 0;
-	top: 0;
-	left: 0;
-	color: rgba(0,0,0,0.1);
-	border: 2px solid rgba(0,0,0,0.1);
-	transition: 0.2s;
+.overlaySettings {
+	position: absolute;
+	width: 606px;
+	height: 606px;
+	z-index: 11;
+	top: 0px;
+	left: 0px;
+	background-color: rgba(255,255,255,0.5);
 }
 
-.closeSettings:hover {
-	color: rgba(255,80,0,1);
-	border: 2px solid rgba(255,80,0,1);
-}*/
+.overlayHide {
+	z-index: -10;
+	display: none;
+}
+
+.overlayShow {
+	z-index: 10;
+	display: block;
+}
 
 .settings {
 	position: absolute;
@@ -244,6 +247,7 @@ toggle through menu options
 	text-align: center;
 	font-family: 'Arvo', serif;
 	font-size: 2em;
+	transition: 0.2s;
 }
 
 .settings:hover {
@@ -263,6 +267,7 @@ toggle through menu options
 	text-align: center;
 	font-family: 'Arvo', serif;
 	font-size: 2em;
+	transition: 0.2s;
 }
 
 .newGame:hover {
@@ -270,7 +275,15 @@ toggle through menu options
 	/*color: rgba(0,200,200,1);*/
 }
 
-
+.draw {
+	height: 135px;
+	color: white;
+	background-color: rgba(0,190,190,1);
+	padding-top: 65px;
+	/*1 1*/
+	top: 203px;
+	left: 203px;
+}
 
 .spanText {
 	font-size: 0.8em;

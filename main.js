@@ -1,13 +1,12 @@
 function BoardCtrl($scope) {
 	// $scope variables
 	$scope.board = [['','',''],['','',''],['','','']];
-	$scope.player = {numOf:2, turn:false, win:false};
+	$scope.player = {startGame:false, numOf:2, turn:false, win:false, draw:false};
 	$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
 	$scope.menu = {overlay:true, play:true, selectGame:false, selectPiece:false, settings:false, newGame:false};
 
 	// Global variables in BoardCtrl
 	var catsCount = 0;
-
 
 	// var taken = [];
 	// var empty = [];
@@ -20,11 +19,14 @@ function BoardCtrl($scope) {
 	// Reset board
 	//-------------------------------------------------
 	$scope.reset = function() {
-		$scope.board = [['','',''],['','',''],['','','']];
-		$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
-		$scope.player.win = false;
-		$scope.menu.overlay = false;
-		catsCount = 0;
+		if(!$scope.menu.settings){
+			$scope.board = [['','',''],['','',''],['','','']];
+			$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
+			$scope.player.win = false;
+			$scope.player.draw = false;
+			$scope.menu.overlay = false;
+			catsCount = 0;
+		}
 	};
 
 	//-------------------------------------------------
@@ -37,13 +39,6 @@ function BoardCtrl($scope) {
 		else {
 			$scope.menu = {overlay:false, play:false, selectGame:false, selectPiece:false, settings:false, newGame:true};
 		}
-	};
-
-	//-------------------------------------------------
-	// Hide game settings
-	//-------------------------------------------------
-	$scope.closeSettings = function() {
-		$scope.menu = {overlay:false, play:false, selectGame:false, selectPiece:false, settings:false, newGame:true};
 	};
 
 	//-------------------------------------------------
@@ -64,9 +59,11 @@ function BoardCtrl($scope) {
 				if(m.selectPiece){
 					m.selectPiece = !m.selectPiece;
 					m.overlay = !m.overlay;
-					$scope.reset();
 					m.settings = false;
 					m.newGame = true;
+					$scope.reset();
+					if(!$scope.player.startGame)
+						$scope.player.startGame = true;
 				}
 			}
 		}
@@ -127,6 +124,6 @@ function BoardCtrl($scope) {
 	function announceWin() {
 		var p = $scope.player;
 		var m = $scope.menu;
-		var winner = p.win ? ( (p.turn ? console.log('COCONUT wins') : console.log('HAZELNUT wins')), p.turn = !p.turn, m.overlay = true) : (catsCount >= 9 ? console.log('No Winner') : null);
+		var winner = p.win ? ( (p.turn ? console.log('COCONUT wins') : console.log('HAZELNUT wins')), p.turn = !p.turn, m.overlay = true) : (catsCount >= 9 ? (p.draw=true, m.overlay = true) : null);
 	}
 }
