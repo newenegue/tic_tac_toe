@@ -12,11 +12,13 @@
 </head>
 <body style="font-family: Arial" x-ng-app="" x-ng-init="reset()">
 	<div class="board" x-ng-controller="Board">
+		<div class="play"><b>play</b></div>
 		<div class="row" x-ng-repeat="row in board track by $index">
 			<div class="cell" x-ng-class="{p0:cell=='X', p1:cell=='O'}" x-ng-repeat="cell in row track by $index" x-ng-click="turn($parent.$index, $index);">
-				<div x-ng-class="{overlayCell:($index == 1 && $parent.$index == 1)}">
+				<!-- <div x-ng-class="{overlayCell:($index == 1 && $parent.$index == 1)}">
+					<div x-ng-class="{overlayBuffer:($index == 1 && $parent.$index == 1)}"></div>
 					<div x-ng-class="{startGame:($index == 1 && $parent.$index == 1)}" x-ng-click="">{{$index == 1 && $parent.$index == 1 ? 'play' : ''}}</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<button type="button" x-ng-click="reset()">New Game</button>

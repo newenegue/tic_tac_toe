@@ -10,6 +10,7 @@ body {
 }
 
 .board {
+	position: relative;
 	width: 606px;
 	height: 606px;
 	margin: 0 auto;
@@ -26,27 +27,58 @@ body {
 	height: 200px;
 }
 
-.overlayCell {
-	position: relative;
+.play {
+	position: absolute;
 	width: 200px;
-	margin-bottom: 3px;
-	margin-right: 3px;
-	float: left;
+	height: 135px;
+	z-index: 20;
+	display: block;
 	text-align: center;
 	font-family: 'Arvo', serif;
 	font-size: 3em;
-	z-index: 2;
-}
-
-.startGame {
-	position: relative;
-	height: 135px;
 	color: rgba(150,150,220,1);
 	padding-top: 65px;
-	z-index: 2;
+	background-color: rgba(255,100,100,0.5);
+	/*background-color: rgba(170,170,220,1);*/
+
+	/*0 0*/
+	/*top: 8px;
+	left: 416px;*/
+
+	/*0 1*/
+/*	top: 8px;
+	left: 619px;*/
+
+	/*0 2*/
+	/*top: 8px;
+	left: 822px;*/
+	
+	/*1 0*/
+	/*top: 203px;
+	left: 0px;*/
+
+	/*1 1*/
+	/*top: 203px;
+	left: 203px;*/
+	
+	/*1 2*/
+	top: 203px;
+	left: 406px;
+
+	/*2 0*/
+	/*top: 414px;
+	left: 416px;*/
+
+	/*2 1*/
+	/*top: 414px;
+	left: 619px;*/
+
+	/*2 2*/
+	/*top: 414px;
+	left: 822px;*/
 }
 
-.startGame:hover {
+.play:hover {
 	color: white;
 	background-color: rgba(170,170,220,1);
 }
