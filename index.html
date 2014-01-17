@@ -10,20 +10,23 @@
 	<title>TicTacToe</title>
 </head>
 <body style="font-family: Arial" x-ng-app="">
-	<div class="board" x-ng-controller="Board">
+	<div class="board" x-ng-controller="BoardCtrl">
 
 		<!-- menu -->
 		<div class="overlayMenu" x-ng-class="{hide:!menu.overlay}"></div> 
 		<!-- play -->
 		<div class="menu play" x-ng-class="{show:menu.play, hide:!menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
 		<!-- select game -->
-		<div class="menu select game" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}">select <b>game</b/></div>
-		<div class="menu select singlePlayer" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}" x-ng-click="switchMenu()"><b>single</b> player</div>
-		<div class="menu select twoPlayer" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}" x-ng-click="switchMenu()"><b>two</b> player</div>
+		<div class="menu select game" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}"><span class="spanText">select</span> <b>game</b/></div>
+		<div class="menu select singlePlayer" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}" x-ng-click="switchMenu()"><b>single</b> <span class="spanText">player</span></div>
+		<div class="menu select twoPlayer" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}" x-ng-click="switchMenu()"><b>two</b> <span class="spanText">player</span></div>
 		<!-- select piece -->
-		<div class="menu select piece" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}">select <b>piece</b></div>
+		<div class="menu select piece" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}"><span class="spanText">select</span> <b>piece</b></div>
 		<div class="menu select piece1" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="player.turn=false; switchMenu();"><b>coconut</b></div>
 		<div class="menu select piece2" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
+		<!-- in game buttons -->
+		<div class="newGame" x-ng-click="reset()" x-ng-class="{show:menu.newGame, hide:!menu.newGame}"><span class="spanText">new</span> <b>game</b></div>
+		<div class="settings" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame, hide:!menu.newGame, settingsOpen:menu.settings}"><b>settings</b></div>
 
 		<div class="spoon"></div>
 		<div class="choco"></div>
@@ -33,7 +36,6 @@
 			<div class="cell" x-ng-class="{p0:cell=='X', p1:cell=='O'}" x-ng-repeat="cell in row track by $index" x-ng-click="turn($parent.$index, $index);">
 			</div>
 		</div>
-		<button type="button" x-ng-click="reset()">New Game</button>
 	</div>
 </body>
 </html>

@@ -1,31 +1,54 @@
-function Board($scope) {
+function BoardCtrl($scope) {
+	// $scope variables
 	$scope.board = [['','',''],['','',''],['','','']];
 	$scope.player = {numOf:2, turn:false, win:false};
 	$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
-	$scope.menu = {overlay:true, play:true, selectGame:false, selectPiece:false};
+	$scope.menu = {overlay:true, play:true, selectGame:false, selectPiece:false, settings:false, newGame:false};
+
+	// Global variables in BoardCtrl
+	var catsCount = 0;
+
 
 	// var taken = [];
 	// var empty = [];
+
+	//====================================================================
+	// Global $scope functions in BoardCtrl
+	//====================================================================
 	
+	//-------------------------------------------------
+	// Reset board
+	//-------------------------------------------------
 	$scope.reset = function() {
 		$scope.board = [['','',''],['','',''],['','','']];
 		$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
 		$scope.player.win = false;
 		$scope.menu.overlay = false;
+		catsCount = 0;
 	};
 
-	// check turn true or false to set X or O
-	// if cell is empty then replace it with X or O
-	// if cell is not empty, then replace it will the same player piece
-	$scope.turn = function(row,col) {
-		var b = $scope.board;
-		var p = $scope.player;
-		b[row][col]=(b[row][col]==='' ? ((p.turn = !p.turn) ? 'X':'O') : b[row][col]);
-		// aiDemote(row, col);
-		checkWin();
-		announceWin();
+	//-------------------------------------------------
+	// Display game settings
+	//-------------------------------------------------
+	$scope.openSettings = function() {
+		if(!$scope.menu.settings){
+			$scope.menu = {overlay:true, play:false, selectGame:true, selectPiece:false, settings:true, newGame:true};
+		}
+		else {
+			$scope.menu = {overlay:false, play:false, selectGame:false, selectPiece:false, settings:false, newGame:true};
+		}
 	};
 
+	//-------------------------------------------------
+	// Hide game settings
+	//-------------------------------------------------
+	$scope.closeSettings = function() {
+		$scope.menu = {overlay:false, play:false, selectGame:false, selectPiece:false, settings:false, newGame:true};
+	};
+
+	//-------------------------------------------------
+	// Menu toggle
+	//-------------------------------------------------
 	$scope.switchMenu = function() {
 		var m = $scope.menu;
 		if(m.play){
@@ -41,6 +64,9 @@ function Board($scope) {
 				if(m.selectPiece){
 					m.selectPiece = !m.selectPiece;
 					m.overlay = !m.overlay;
+					$scope.reset();
+					m.settings = false;
+					m.newGame = true;
 				}
 			}
 		}
@@ -48,10 +74,34 @@ function Board($scope) {
 
 	};
 
+	//-------------------------------------------------
+	// On click of each cell place piece
+	//-------------------------------------------------
+	$scope.turn = function(row,col) {
+		var b = $scope.board;
+		var p = $scope.player;
+		catsCount += (b[row][col]==='') ? 1 : 0;
+		b[row][col]=(b[row][col]==='' ? ((p.turn = !p.turn) ? 'X':'O') : b[row][col]);
+
+		// aiDemote(row, col);
+		checkWin();
+		announceWin();
+	};
+
+	//====================================================================
+	// Local functions in BoardCtrl
+	//====================================================================
+
+	//-------------------------------------------------
+	// AI cell demotion
+	//-------------------------------------------------
 	function aiDemote(row, col) {
 		$scope.aiPriority[row][col] -= 100;
 	}
 
+	//-------------------------------------------------
+	// Check for winner
+	//-------------------------------------------------
 	function checkWin() {
 		var b = $scope.board;
 		var p = $scope.player;
@@ -71,9 +121,12 @@ function Board($scope) {
 		}
 	}
 
+	//-------------------------------------------------
+	// Announce winner
+	//-------------------------------------------------
 	function announceWin() {
 		var p = $scope.player;
 		var m = $scope.menu;
-		p.win ? ( (p.turn ? console.log('COCONUT wins') : console.log('HAZELNUT wins')), p.turn = !p.turn, m.overlay = true) : null;
+		var winner = p.win ? ( (p.turn ? console.log('COCONUT wins') : console.log('HAZELNUT wins')), p.turn = !p.turn, m.overlay = true) : (catsCount >= 9 ? console.log('No Winner') : null);
 	}
 }
