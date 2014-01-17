@@ -2,16 +2,7 @@ function Board($scope) {
 	$scope.board = [['','',''],['','',''],['','','']];
 	$scope.player = {piece:false, turn:false, win:false};
 	$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
-	var winningCombos = [
-		[0,1,2],
-		[3,4,5],
-		[6,7,8],
-		[0,3,6],
-		[1,4,7],
-		[2,5,8],
-		[0,4,8],
-		[2,4,6]
-		];
+	$scope.menu = {overlay:true, play:true, selectGame:false, selectPiece:false};
 
 	// var taken = [];
 	// var empty = [];
@@ -33,8 +24,24 @@ function Board($scope) {
 		checkWin();
 	};
 
-	$scope.play = function() {
-
+	$scope.switchMenu = function() {
+		var m = $scope.menu;
+		if(m.play){
+			m.play = !m.play;
+			m.selectGame=!m.selectGame;
+		}
+		else {
+			if(m.selectGame) {
+				m.selectGame = !m.selectGame;
+				m.selectPiece = !m.selectPiece;
+			}
+			else {
+				if(m.selectPiece){
+					m.selectPiece = !m.selectPiece;
+					m.overlay = !m.overlay;
+				}
+			}
+		}
 	};
 
 	function aiDemote(row, col) {

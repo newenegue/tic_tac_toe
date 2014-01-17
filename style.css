@@ -2,13 +2,9 @@
 .cf:after { clear: both; }
 .cf { zoom: 1; }
 
-h1 {
-	text-align: center;
-}
-
-body {
-}
-
+/*-----------------------------------------
+Game board
+-----------------------------------------*/
 .board {
 	position: relative;
 	width: 606px;
@@ -25,80 +21,6 @@ body {
 .row {
 	width: 610px;
 	height: 200px;
-}
-
-.play {
-	position: absolute;
-	width: 200px;
-	height: 135px;
-	z-index: 20;
-	display: block;
-	text-align: center;
-	font-family: 'Arvo', serif;
-	font-size: 3em;
-	color: rgba(150,150,220,1);
-	padding-top: 65px;
-	background-color: rgba(255,100,100,0.5);
-	/*background-color: rgba(170,170,220,1);*/
-
-	/*0 0*/
-	/*top: 8px;
-	left: 416px;*/
-
-	/*0 1*/
-/*	top: 8px;
-	left: 619px;*/
-
-	/*0 2*/
-	/*top: 8px;
-	left: 822px;*/
-	
-	/*1 0*/
-	/*top: 203px;
-	left: 0px;*/
-
-	/*1 1*/
-	/*top: 203px;
-	left: 203px;*/
-	
-	/*1 2*/
-	top: 203px;
-	left: 406px;
-
-	/*2 0*/
-	/*top: 414px;
-	left: 416px;*/
-
-	/*2 1*/
-	/*top: 414px;
-	left: 619px;*/
-
-	/*2 2*/
-	/*top: 414px;
-	left: 822px;*/
-}
-
-.play:hover {
-	color: white;
-	background-color: rgba(170,170,220,1);
-}
-
-.selectGame {
-	display: none;
-	height: 160px;
-	background-color: rgba(170,170,220,1);
-	color: white;
-	padding-top: 40px;
-}
-
-.player {
-	color: rgba(170,170,220,1);
-	background-color: rgba(255,255,255,1);
-	transition: 0.2s;
-}
-
-.player:hover {
-	color: orange;
 }
 
 .cell {
@@ -118,6 +40,9 @@ body {
 	/*transition: 0.1s;*/
 }
 
+/*-----------------------------------------
+Player pieces
+-----------------------------------------*/
 .p0 {
 	background-image:url('img/mac0.png');
 	background-size: 200px 200px;
@@ -138,6 +63,173 @@ body {
 	background-size: 200px 200px;
 }
 
+/*-----------------------------------------
+Menu overlay on top of board
+toggle through menu options
+-----------------------------------------*/
+.overlayMenu {
+	position: absolute;
+	width: 606px;
+	height: 606px;
+	z-index: 10;
+	top: 0px;
+	left: 0px;
+	/*background-color: rgba(255,100,100,0.3);*/
+}
+
+.menu {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	font-family: 'Arvo', serif;
+	font-size: 3em;
+}
+
+.play {
+	height: 135px;
+	color: rgba(0,200,200,1);
+	padding-top: 65px;
+	transition: 0.2s;
+
+	/*0 0*/
+	/*top: 0px;
+	left: 0px;*/
+
+	/*0 1*/
+	/*top: 0px;
+	left: 203px;*/
+
+	/*0 2*/
+	/*top: 0px;
+	left: 406px;*/
+	
+	/*1 0*/
+	/*top: 203px;
+	left: 0px;*/
+
+	/*1 1*/
+	top: 203px;
+	left: 203px;
+	
+	/*1 2*/
+	/*top: 203px;
+	left: 406px;*/
+
+	/*2 0*/
+	/*top: 406px;
+	left: 0px;*/
+
+	/*2 1*/
+	/*top: 406px;
+	left: 203px;*/
+
+	/*2 2*/
+	/*top: 406px;
+	left: 406px;*/
+}
+
+.play:hover {
+	color: white;
+	background-color: rgba(0,190,190,1);
+}
+
+.select {
+	height: 165px;
+	/*background-color: rgba(150,150,220,1);*/
+	background-color: rgba(0,190,190,1);
+	color: white;
+	padding-top: 35px;
+	display: none;
+}
+
+.game {
+	transition: 0s;
+	/*0 1*/
+	top: 0px;
+	left: 203px;
+}
+
+.piece {
+	transition: 0s;
+	/*0 1*/
+	top: 0px;
+	left: 203px;
+}
+
+.singlePlayer {
+	color: rgba(0,200,200,1);
+	background-color: transparent;
+	transition: 0.2s;
+	/*1 0*/
+	top: 203px;
+	left: 0px;
+}
+
+.singlePlayer:hover {
+	color: rgba(255,80,0,1);
+}
+
+.twoPlayer {
+	color: rgba(0,200,200,1);
+	background-color: transparent;
+	transition: 0.2s;
+	/*1 2*/
+	top: 203px;
+	left: 406px;
+}
+
+.twoPlayer:hover {
+	color: rgba(255,80,0,1);
+}
+
+.piece1 {
+	font-size: 2em;
+	color: rgba(0,200,200,1);
+	height: 130px;
+	padding-top: 70px;
+	background-image:url('img/mac0.png');
+	background-size: 200px 200px;
+	transition: 0.2s;
+	/*1 0*/
+	top: 203px;
+	left: 0px;
+}
+
+.piece1:hover {
+	color: rgba(255,80,0,1);
+}
+
+.piece2 {
+	font-size: 2em;
+	color: rgba(0,220,220,1);
+	height: 135px;
+	padding-top: 65px;
+	background-image:url('img/mac1.png');
+	background-size: 200px 200px;
+	transition: 0.2s;
+	/*1 2*/
+	top: 203px;
+	left: 406px;
+}
+
+.piece2:hover {
+	color: rgba(255,80,0,1);
+}
+
+.hide {
+	z-index: -20;
+	display: none;
+}
+
+.show {
+	z-index: 20;
+	display: block;
+}
+
+/*-----------------------------------------
+Additional images
+-----------------------------------------*/
 .spoon {
 	position: fixed;
 	background-image:url('img/spoon.png');
@@ -173,8 +265,7 @@ body {
 
 }
 
-.overlay {
-	/*position: relative;*/
+/*.overlay {
 	display: none;
 	width: 100%;
 	height: 100%;
@@ -206,19 +297,22 @@ body {
     background-color: rgba(50,50,50,0.9);
     border-radius: 5px;
     text-align: center;
-    z-index: 22; /* 1px higher than the overlay layer */
+    z-index: 22;
 }
 
 form {
 	float: left;
 	margin: 0 auto;
-}
+}*/
 
 button {
 	float: right;
 	margin: 0 auto;
 }
 
+/*-----------------------------------------
+Media Queries
+-----------------------------------------*/
 @media (max-width: 700px) and (min-width: 300px) {
 
 .board {
