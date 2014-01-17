@@ -33,6 +33,10 @@ function Board($scope) {
 		checkWin();
 	};
 
+	$scope.play = function() {
+		
+	};
+
 	function aiDemote(row, col) {
 		$scope.aiPriority[row][col] -= 100;
 	}
@@ -40,19 +44,18 @@ function Board($scope) {
 	function checkWin() {
 		var b = $scope.board;
 		var p = $scope.player;
+		var win = false;
 		for(var i = 0; i < b.length; i++){
 			// horiz win
 			p.win = (b[i][0]==b[i][1] && b[i][1]==b[i][2] && b[i][0]!=='') ? true : false;
-
-			// vert win
-			p.win = (b[0][i]==b[1][i] && b[1][i]==b[2][i] && b[0][i]!=='') ? true : false;
-
-			// diag win
-			p.win = (b[1][1] !== '') ? ( ((b[0][0]==b[1][1] && b[1][1]==b[2][2]) || (b[2][0]==b[1][1] && b[1][1]==b[0][2]))  ? true : false) : null;
-
-			if(p.win === true)
-				break;
+			if(!p.win) {
+				// vert win
+				p.win = (b[0][i]==b[1][i] && b[1][i]==b[2][i] && b[0][i]!=='') ? true : false;
+				if(!p.win){
+					// diag win
+					p.win = (b[1][1] !== '') ? ( ((b[0][0]==b[1][1] && b[1][1]==b[2][2]) || (b[2][0]==b[1][1] && b[1][1]==b[0][2]))  ? true : false) : null;
+				}
+			}
 		}
-		// console.log(p.win);		
 	}
 }
