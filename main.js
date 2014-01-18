@@ -111,8 +111,31 @@ function BoardCtrl($scope) {
 					p.win = (b[0][i]==b[1][i] && b[1][i]==b[2][i] && b[0][i]!=='') ? true : false;
 					if(!p.win){
 						// diag win
-						p.win = (b[1][1] !== '') ? ( ((b[0][0]==b[1][1] && b[1][1]==b[2][2]) || (b[2][0]==b[1][1] && b[1][1]==b[0][2]))  ? true : false) : null;
+						p.win = (b[1][1] !== '') ? ((b[0][0]==b[1][1] && b[1][1]==b[2][2]) ? true : false) : null;
+						if(!p.win) {
+							p.win = (b[1][1] !== '') ? ((b[2][0]==b[1][1] && b[1][1]==b[0][2]) ? true : false) : null;
+							if(p.win){
+								b[1][1] = 'W';
+								b[2][0] = b[1][1];
+								b[0][2] = b[2][0];
+							}
+						}
+						else{
+							b[1][1] = 'W';
+							b[0][0] = b[1][1];
+							b[2][2] = b[0][0];
+						}
 					}
+					else {
+						b[0][i] = 'W';
+						b[1][i] = b[0][i];
+						b[2][i] = b[1][i];
+					}
+				}
+				else {
+					b[i][0] = 'W';
+					b[i][1] = b[i][0];
+					b[i][2] = b[i][1];
 				}
 			}
 		}
@@ -124,6 +147,7 @@ function BoardCtrl($scope) {
 	function announceWin() {
 		var p = $scope.player;
 		var m = $scope.menu;
-		var winner = p.win ? ( (p.turn ? console.log('COCONUT wins') : console.log('HAZELNUT wins')), p.turn = !p.turn, m.overlay = true) : (catsCount >= 9 ? (p.draw=true, m.overlay = true) : null);
-	}
+		var winner = p.win ? (m.overlay = true) : (catsCount >= 9 ? (p.draw=true, m.overlay = true) : null);
+		// console.log(winner);
+	}/*, p.turn = !p.turn,*/
 }

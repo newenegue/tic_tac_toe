@@ -284,6 +284,15 @@ toggle through menu options
 	top: 203px;
 	left: 203px;
 }
+.win {
+	height: 135px;
+	color: rgba(255,80,0,1);
+	padding-top: 55px;
+	/*1 1*/
+	top: 203px;
+	left: 203px;
+	font-size: 2.2em;
+}
 
 .spanText {
 	font-size: 0.8em;
@@ -298,6 +307,13 @@ toggle through menu options
 	z-index: 20;
 	display: block;
 }
+
+.showWin {
+	z-index: 5;
+	display: block;
+}
+
+
 
 /*-----------------------------------------
 Additional images
