@@ -4,8 +4,9 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script type="text/javascript" src="main.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+	<link rel="stylesheet" type="text/css" href="styles/animate.min.css" />
+	<script type="text/javascript" src="scripts/main.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 	<title>TicTacToe</title>
 </head>
@@ -15,7 +16,7 @@
 		<!-- menu -->
 		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:menu.overlay}"></div> 
 		<!-- play -->
-		<div class="menu play hide" x-ng-class="{show:menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
+		<div class="menu play animated fadeIn hide" x-ng-class="{show:menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
 		<!-- select game -->
 		<div class="menu select game hide" x-ng-class="{show:menu.selectGame}"><span>select</span> <b>game</b/></div>
 		<div class="menu select singlePlayer hide" x-ng-class="{show:menu.selectGame}" x-ng-click="switchMenu()"><b>single</b> <span>player</span></div>
@@ -25,13 +26,14 @@
 		<div class="menu select piece1 hide" x-ng-class="{show:menu.selectPiece}" x-ng-click="player.turn=false; switchMenu();"><b>coconut</b></div>
 		<div class="menu select piece2 hide" x-ng-class="{show:menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
 		<!-- in game buttons -->
-		<div class="newGame hide" x-ng-click="reset()" x-ng-class="{show:menu.newGame}"><span>new</span> <b>game</b></div>
+		<div class="newGame animated fadeInDown hide" x-ng-click="reset()" x-ng-class="{show:menu.newGame,playAgain:(game.draw || player.win)}"><span>new</span> <b>game</b></div>
 		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:menu.settings}"></div> 
-		<div class="settings hide" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame,settingsOpen:menu.settings}"><b>settings</b></div>
+		<div class="settings animated fadeInDown hide" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame,settingsOpen:menu.settings}"><b>settings</b></div>
+		<div class="settings dot hide" x-ng-class="{show:menu.settings}">.</div>
 		<!-- game result -->
 		<div class="menu draw hide" x-ng-class="{show:game.draw}"><b>draw</b></div>
-		<div class="menu win hide" x-ng-class="{showWin:game.coco_wins}"><b>coconut</b> wins</div>
-		<div class="menu win hide" x-ng-class="{showWin:game.hazel_wins}"><b>hazelnut</b> wins</div>
+		<!-- <div class="menu win hide" x-ng-class="{showWin:game.coco_wins}"><b>coconut</b> <span>wins</span></div> -->
+		<!-- <div class="menu win hide" x-ng-class="{showWin:game.hazel_wins}"><b>hazelnut</b> <span>wins</span></div> -->
 
 		<!-- additional images -->
 		<div class="imgHolder">

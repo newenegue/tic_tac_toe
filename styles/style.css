@@ -48,22 +48,22 @@ Game board
 Player pieces
 -----------------------------------------*/
 .p0 {
-	background-image:url('img/mac0.png');
+	background-image:url('../img/mac0.png');
 	background-size: 200px 200px;
 }
 
 .p1 {
-	background-image:url('img/mac1.png');
+	background-image:url('../img/mac1.png');
 	background-size: 200px 200px;
 }
 
 .p0_win {
-	background-image:url('img/mac0_win.png');
+	background-image:url('../img/mac0_win.png');
 	background-size: 200px 200px;
 }
 
 .p1_win {
-	background-image:url('img/mac1_win.png');
+	background-image:url('../img/mac1_win.png');
 	background-size: 200px 200px;
 }
 
@@ -95,6 +95,8 @@ toggle through menu options
 	color: rgba(0,200,200,1);
 	padding-top: 65px;
 	transition: 0.2s;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-delay: 0.3s;
 
 	/*0 0*/
 	/*top: 0px;
@@ -145,17 +147,17 @@ toggle through menu options
 	color: white;
 	padding-top: 35px;
 	display: none;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-delay: 0s;
 }
 
 .game {
-	transition: 0s;
 	/*0 1*/
 	top: 0px;
 	left: 203px;
 }
 
 .piece {
-	transition: 0s;
 	/*0 1*/
 	top: 0px;
 	left: 203px;
@@ -171,7 +173,7 @@ toggle through menu options
 }
 
 .singlePlayer:hover {
-	color: rgba(255,80,0,1);
+	color: rgba(255,120,40,1);
 }
 
 .twoPlayer {
@@ -184,15 +186,15 @@ toggle through menu options
 }
 
 .twoPlayer:hover {
-	color: rgba(255,80,0,1);
+	color: rgba(255,120,40,1);
 }
 
 .piece1 {
 	font-size: 2em;
-	color: rgba(0,200,200,1);
+	color: transparent;
 	height: 130px;
 	padding-top: 70px;
-	background-image:url('img/mac0.png');
+	background-image:url('../img/mac0.png');
 	background-size: 200px 200px;
 	transition: 0.2s;
 	/*1 0*/
@@ -201,15 +203,15 @@ toggle through menu options
 }
 
 .piece1:hover {
-	color: rgba(255,80,0,1);
+	color: rgba(0,200,200,1);
 }
 
 .piece2 {
 	font-size: 2em;
-	color: rgba(0,220,220,1);
+	color: transparent;
 	height: 135px;
 	padding-top: 65px;
-	background-image:url('img/mac1.png');
+	background-image:url('../img/mac1.png');
 	background-size: 200px 200px;
 	transition: 0.2s;
 	/*1 2*/
@@ -218,7 +220,8 @@ toggle through menu options
 }
 
 .piece2:hover {
-	color: rgba(255,80,0,1);
+	background-color: rgba(0,220,220,1);
+	color: rgba(0,215,215,1);
 }
 
 .overlaySettings {
@@ -243,23 +246,37 @@ toggle through menu options
 
 .settings {
 	position: absolute;
+	color: rgba(255,80,0,1);
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: -200px;
-	top: 300px;
+	left: -250px;
+	top: 150px;
 	text-align: right;
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
 	transition: 0.2s;
+	/*-webkit-animation-duration: 0.5s;
+	-webkit-animation-delay: 0.05s;*/
+	-webkit-animation-delay: 0.2s;
+	-webkit-animation-duration: 1s;
 }
 
 .settings:hover {
-	color: rgba(255,80,0,1);
+	color: rgba(255,120,40,1);
 }
 
 .settingsOpen {
 	color: rgba(0,200,200,1);
+}
+
+.dot {
+	text-align: left;
+	color: rgba(0,200,200,1);
+	font-size: 3em;
+	width: 10px;
+	top: 128px;
+	left: -75px;
 }
 
 .newGame {
@@ -267,17 +284,24 @@ toggle through menu options
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: -200px;
-	top: 255px;
+	left: -250px;
+	top: 110px;
 	text-align: right;
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
 	transition: 0.2s;
+	/*-webkit-animation-delay: 0.2s;
+	-webkit-animation-duration: 1s;*/
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-delay: 0.05s;
 }
 
 .newGame:hover {
-	color: rgba(255,80,0,1);
-	/*color: rgba(0,200,200,1);*/
+	color: rgba(255,120,40,1);
+}
+
+.playAgain {
+	color: rgba(0,190,190,1);
 }
 
 .draw {
@@ -289,10 +313,11 @@ toggle through menu options
 	top: 203px;
 	left: 203px;
 }
+
 .win {
-	height: 135px;
-	color: rgba(255,80,0,1);
-	padding-top: 55px;
+	height: 140px;
+	color: rgba(255,120,40,1);
+	padding-top: 60px;
 	/*1 1*/
 	top: 203px;
 	left: 203px;
@@ -337,7 +362,7 @@ Additional images
 }
 
 .spoon {
-	background-image:url('img/spoon.png');
+	background-image:url('../img/spoon.png');
 	background-size: 650px 414px;
 	bottom: -150px;
 	left: -530px;
@@ -346,28 +371,29 @@ Additional images
 }
 
 .choco {
-	background-image:url('img/choco.png');
+	background-image:url('../img/choco.png');
 	background-size: 180px 180px;
 	top: 400px;
 	left: -420px;
 }
 
 .coffee {
-	background-image:url('img/coffee.png');
+	background-image:url('../img/coffee.png');
 	background-size: 210px 210px;
 	width: 210px;
 	height: 210px;
 	top: 80px;
 	left: 750px;
+	-webkit-transform: rotate(38deg);
 }
 
 .almond {
-	background-image:url('img/almond.png');
+	background-image:url('../img/almond.png');
 	background-size: 200px 200px;
 }
 
 .lav {
-	background-image:url('img/lav.png');
+	background-image:url('../img/lav.png');
 	background-size: 600px 242px;
 	width: 600px;
 	height: 242px;
