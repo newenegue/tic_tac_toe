@@ -1,7 +1,8 @@
 function BoardCtrl($scope) {
 	// $scope variables
 	$scope.board = [['','',''],['','',''],['','','']];
-	$scope.player = {startGame:false, numOf:2, turn:false, win:false, draw:false};
+	$scope.game = {startGame:false, draw:false, coco_wins:false, hazel_wins:false, pNum:2};
+	$scope.player = {turn:false, win:false};
 	$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
 	$scope.menu = {overlay:true, play:true, selectGame:false, selectPiece:false, settings:false, newGame:false};
 
@@ -21,9 +22,11 @@ function BoardCtrl($scope) {
 	$scope.reset = function() {
 		if(!$scope.menu.settings){
 			$scope.board = [['','',''],['','',''],['','','']];
-			$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
+			$scope.game.draw = false;
+			$scope.game.coco_wins = false;
+			$scope.game.hazel_wins = false;
 			$scope.player.win = false;
-			$scope.player.draw = false;
+			$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
 			$scope.menu.overlay = false;
 			catsCount = 0;
 		}
@@ -62,8 +65,8 @@ function BoardCtrl($scope) {
 					m.settings = false;
 					m.newGame = true;
 					$scope.reset();
-					if(!$scope.player.startGame)
-						$scope.player.startGame = true;
+					if(!$scope.game.startGame)
+						$scope.game.startGame = true;
 				}
 			}
 		}
@@ -79,10 +82,9 @@ function BoardCtrl($scope) {
 		var p = $scope.player;
 		catsCount += (b[row][col]==='') ? 1 : 0;
 		b[row][col]=(b[row][col]==='' ? ((p.turn = !p.turn) ? 'X':'O') : b[row][col]);
-
 		// aiDemote(row, col);
 		checkWin();
-		announceWin();
+		
 	};
 
 	//====================================================================
@@ -101,7 +103,9 @@ function BoardCtrl($scope) {
 	//-------------------------------------------------
 	function checkWin() {
 		var b = $scope.board;
+		var g = $scope.game;
 		var p = $scope.player;
+		var m = $scope.menu;
 		for(var i = 0; i < b.length; i++){
 			// horiz win
 			if(!p.win) {
@@ -110,44 +114,36 @@ function BoardCtrl($scope) {
 					// vert win
 					p.win = (b[0][i]==b[1][i] && b[1][i]==b[2][i] && b[0][i]!=='') ? true : false;
 					if(!p.win){
-						// diag win
-						p.win = (b[1][1] !== '') ? ((b[0][0]==b[1][1] && b[1][1]==b[2][2]) ? true : false) : null;
-						if(!p.win) {
-							p.win = (b[1][1] !== '') ? ((b[2][0]==b[1][1] && b[1][1]==b[0][2]) ? true : false) : null;
-							if(p.win){
-								b[1][1] = 'W';
-								b[2][0] = b[1][1];
-								b[0][2] = b[2][0];
+						if(b[1][1]!==''){
+							// diag win
+							p.win = (b[0][0]==b[1][1] && b[1][1]==b[2][2]) ? true : false;
+							if(!p.win) {
+								p.win = (b[2][0]==b[1][1] && b[1][1]==b[0][2]) ? true : false;
+								if(p.win){ b[1][1] = 'W'; b[2][0] = b[1][1]; b[0][2] = b[2][0]; }
 							}
+							else{ b[1][1] = 'W'; b[0][0] = b[1][1]; b[2][2] = b[0][0]; }
 						}
-						else{
-							b[1][1] = 'W';
-							b[0][0] = b[1][1];
-							b[2][2] = b[0][0];
-						}
-					}
-					else {
-						b[0][i] = 'W';
-						b[1][i] = b[0][i];
-						b[2][i] = b[1][i];
-					}
+					}// end diag win
+					else { b[0][i] = 'W'; b[1][i] = b[0][i]; b[2][i] = b[1][i]; }
+				} // end vert win
+				else { b[i][0] = 'W'; b[i][1] = b[i][0]; b[i][2] = b[i][1]; }
+			} // end horiz win
+		} // end for loop
+		if(p.win) { // player.win && game.startGame && player.turn
+			if(g.startGame){
+				if(p.turn) {
+					g.coco_wins = true;
 				}
 				else {
-					b[i][0] = 'W';
-					b[i][1] = b[i][0];
-					b[i][2] = b[i][1];
+					g.hazel_wins = true;
 				}
 			}
+			m.overlay = true;
+			// p.turn = !p.turn;
 		}
-	}
-
-	//-------------------------------------------------
-	// Announce winner
-	//-------------------------------------------------
-	function announceWin() {
-		var p = $scope.player;
-		var m = $scope.menu;
-		var winner = p.win ? (m.overlay = true) : (catsCount >= 9 ? (p.draw=true, m.overlay = true) : null);
-		// console.log(winner);
-	}/*, p.turn = !p.turn,*/
-}
+		else if (catsCount >= 9) {
+			g.draw = true;
+			m.overlay = true;
+		}
+	}	// end checkWin()
+} // end BoardCtrl

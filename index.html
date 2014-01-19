@@ -13,28 +13,34 @@
 	<div class="board" x-ng-controller="BoardCtrl">
 
 		<!-- menu -->
-		<div class="overlayMenu" x-ng-class="{overlayShow:menu.overlay, overlayHide:!menu.overlay}"></div> 
+		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:menu.overlay}"></div> 
 		<!-- play -->
-		<div class="menu play" x-ng-class="{show:menu.play, hide:!menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
+		<div class="menu play hide" x-ng-class="{show:menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
 		<!-- select game -->
-		<div class="menu select game" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}"><span class="spanText">select</span> <b>game</b/></div>
-		<div class="menu select singlePlayer" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}" x-ng-click="switchMenu()"><b>single</b> <span class="spanText">player</span></div>
-		<div class="menu select twoPlayer" x-ng-class="{show:menu.selectGame,hide:!menu.selectGame}" x-ng-click="switchMenu()"><b>two</b> <span class="spanText">player</span></div>
+		<div class="menu select game hide" x-ng-class="{show:menu.selectGame}"><span>select</span> <b>game</b/></div>
+		<div class="menu select singlePlayer hide" x-ng-class="{show:menu.selectGame}" x-ng-click="switchMenu()"><b>single</b> <span>player</span></div>
+		<div class="menu select twoPlayer hide" x-ng-class="{show:menu.selectGame}" x-ng-click="switchMenu()"><b>two</b> <span>player</span></div>
 		<!-- select piece -->
-		<div class="menu select piece" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}"><span class="spanText">select</span> <b>piece</b></div>
-		<div class="menu select piece1" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="player.turn=false; switchMenu();"><b>coconut</b></div>
-		<div class="menu select piece2" x-ng-class="{show:menu.selectPiece,hide:!menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
+		<div class="menu select piece hide" x-ng-class="{show:menu.selectPiece}"><span>select</span> <b>piece</b></div>
+		<div class="menu select piece1 hide" x-ng-class="{show:menu.selectPiece}" x-ng-click="player.turn=false; switchMenu();"><b>coconut</b></div>
+		<div class="menu select piece2 hide" x-ng-class="{show:menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
 		<!-- in game buttons -->
-		<div class="newGame" x-ng-click="reset()" x-ng-class="{show:menu.newGame, hide:!menu.newGame}"><span class="spanText">new</span> <b>game</b></div>
-		<div class="overlaySettings" x-ng-class="{overlayShow:menu.settings, overlayHide:!menu.settings}"></div> 
-		<div class="settings" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame, hide:!menu.newGame, settingsOpen:menu.settings}"><b>settings</b></div>
-		<!-- display result -->
-		<div class="menu draw" x-ng-class="{show:player.draw, hide:!player.draw}"><b>draw</b></div>
-		<div class="menu win hide" x-ng-class="{showWin:(player.win && player.startGame && player.turn)}"><b>coconut</b> wins</div>
-		<div class="menu win hide" x-ng-class="{showWin:(player.win && player.startGame && !player.turn)}"><b>hazelnut</b> wins</div>
+		<div class="newGame hide" x-ng-click="reset()" x-ng-class="{show:menu.newGame}"><span>new</span> <b>game</b></div>
+		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:menu.settings}"></div> 
+		<div class="settings hide" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame,settingsOpen:menu.settings}"><b>settings</b></div>
+		<!-- game result -->
+		<div class="menu draw hide" x-ng-class="{show:game.draw}"><b>draw</b></div>
+		<div class="menu win hide" x-ng-class="{showWin:game.coco_wins}"><b>coconut</b> wins</div>
+		<div class="menu win hide" x-ng-class="{showWin:game.hazel_wins}"><b>hazelnut</b> wins</div>
 
-		<div class="spoon"></div>
-		<div class="choco"></div>
+		<!-- additional images -->
+		<div class="imgHolder">
+			<div class="images spoon"></div>
+			<div class="images choco"></div>
+			<div class="images coffee"></div>
+			<!-- <div class="images almond"></div> -->
+			<div class="images lav"></div>
+		</div>
 
 		<!-- create board -->
 		<div class="row" x-ng-repeat="row in board track by $index">

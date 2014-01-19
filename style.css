@@ -2,6 +2,10 @@
 .cf:after { clear: both; }
 .cf { zoom: 1; }
 
+body {
+	margin-top: 30px;
+}
+
 /*-----------------------------------------
 Game board
 -----------------------------------------*/
@@ -242,11 +246,11 @@ toggle through menu options
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: 800px;
-	top: 200px;
-	text-align: center;
+	left: -200px;
+	top: 300px;
+	text-align: right;
 	font-family: 'Arvo', serif;
-	font-size: 2em;
+	font-size: 1.8em;
 	transition: 0.2s;
 }
 
@@ -263,10 +267,11 @@ toggle through menu options
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: 800px;
-	text-align: center;
+	left: -200px;
+	top: 255px;
+	text-align: right;
 	font-family: 'Arvo', serif;
-	font-size: 2em;
+	font-size: 1.8em;
 	transition: 0.2s;
 }
 
@@ -294,7 +299,7 @@ toggle through menu options
 	font-size: 2.2em;
 }
 
-.spanText {
+span {
 	font-size: 0.8em;
 }
 
@@ -313,44 +318,62 @@ toggle through menu options
 	display: block;
 }
 
-
-
 /*-----------------------------------------
 Additional images
 -----------------------------------------*/
-.spoon {
-	position: fixed;
-	background-image:url('img/spoon.png');
-	background-size: 650px 414px;
-	bottom: -50px;
-	left: -150px;
-	width: 650px;
-	height: 414px;
+.imgHolder {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	/*background-color: red;*/
 	z-index: -1;
 }
 
-.choco{
-	background-image:url('img/choco.png');
-	background-size: 200px 200px;
-	float: right;
-	width: 200px;
-	height: 200px;
-	position: fixed;
-	top: 50px;
-	right: 80px;
+.images {
+	position: absolute;
+	width: 180px;
+	height: 180px;
 	z-index: -1;
+}
+
+.spoon {
+	background-image:url('img/spoon.png');
+	background-size: 650px 414px;
+	bottom: -150px;
+	left: -530px;
+	width: 650px;
+	height: 414px;
+}
+
+.choco {
+	background-image:url('img/choco.png');
+	background-size: 180px 180px;
+	top: 400px;
+	left: -420px;
 }
 
 .coffee {
-
+	background-image:url('img/coffee.png');
+	background-size: 210px 210px;
+	width: 210px;
+	height: 210px;
+	top: 80px;
+	left: 750px;
 }
 
 .almond {
-
+	background-image:url('img/almond.png');
+	background-size: 200px 200px;
 }
 
 .lav {
-
+	background-image:url('img/lav.png');
+	background-size: 600px 242px;
+	width: 600px;
+	height: 242px;
+	top: 500px;
+	left: 480px;
+	-webkit-transform: rotate(70deg);
 }
 
 /*-----------------------------------------
