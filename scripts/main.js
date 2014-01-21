@@ -2,8 +2,6 @@
 // display which player gets first move?
 // display whos turn it is?
 // display text of winner?
-// use player.piece to know which one is the user
-// check only on those pieces
 
 function BoardCtrl($scope) {
 	// $scope variables
@@ -18,9 +16,6 @@ function BoardCtrl($scope) {
 	// Global variables in BoardCtrl
 	var catsCount = 0;
 
-	// var taken = [];
-	// var empty = [];
-
 	//====================================================================
 	// Global $scope functions in BoardCtrl
 	//====================================================================
@@ -29,6 +24,7 @@ function BoardCtrl($scope) {
 	// Reset board
 	//-------------------------------------------------
 	$scope.reset = function() {
+		// reset only if settings overlay is off
 		if(!$scope.menu.settings){
 			if($scope.player.win){
 				// two player - winner plays first next game
@@ -59,14 +55,17 @@ function BoardCtrl($scope) {
 	$scope.openSettings = function() {
 		if(!$scope.menu.settings){
 			$scope.menu = {overlay:true, play:false, selectGame:true, selectPiece:false, settings:true, newGame:true};
-			$scope.game.mode = $scope.game.pNum;
 			$scope.settings = 'settings \u2022';
+			// game mode holder
+			$scope.game.mode = $scope.game.pNum;
 		}
 		else {
 			$scope.menu = {overlay:false, play:false, selectGame:false, selectPiece:false, settings:false, newGame:true};
-			$scope.menu.overlay = !$scope.game.inProgress ? true : false;
-			$scope.game.pNum = $scope.game.mode;
 			$scope.settings = 'settings';
+			// keep overlay on if game is over
+			$scope.menu.overlay = !$scope.game.inProgress ? true : false;
+			// set game mode back to in progess game
+			$scope.game.pNum = $scope.game.mode;
 		}
 	};
 
@@ -108,18 +107,26 @@ function BoardCtrl($scope) {
 	// On click of each cell place piece
 	//-------------------------------------------------
 	$scope.turn = function(row,col) {
+		// initialize local variables
 		var b = $scope.board;
 		var p = $scope.player;
 		var g = $scope.game;
 		var m = $scope.menu;
+		var aiP = $scope.aiPriority;
+		// AI check for repeat cell clicks
+		var aiTaken = (b[row][col]==='X' || b[row][col]==='O') ? true : false;
+		// track cats game
 		catsCount += (b[row][col]==='') ? 1 : 0;
+		// place user piece
 		b[row][col]=(b[row][col]==='' ? ((p.turn = !p.turn) ? 'X':'O') : b[row][col]);
+		// demote cell for AI
 		aiDemote(row, col);
 		checkWin(b,g,p,m);
-		// modify aiPriority based on users turn
-		// demote users 
-		if(g.pNum == 1 && !p.win){
-			aiTurn(b,p);
+		// coconut - false - X - player.piece
+		// hazelnut - true - O - player.piece
+		// AI
+		if(g.pNum == 1 && !p.win && !aiTaken){
+			aiTurn(b,p,aiP);
 			checkWin(b,g,p,m);
 		}
 	};
@@ -145,9 +152,8 @@ function BoardCtrl($scope) {
 	//-------------------------------------------------
 	// AI turn to play
 	//-------------------------------------------------
-	function aiTurn(b, p){
+	function aiTurn(b, p, aiP){
 		var temp = [];
-		var aiP = $scope.aiPriority;
 		// find max value in each row in aiPriority
 		for(var i = 0; i < aiP.length; i++) {
 			temp[i] = Math.max.apply(Math,aiP[i]);
@@ -156,8 +162,42 @@ function BoardCtrl($scope) {
 		var maxRow = temp.indexOf(Math.max.apply(Math,temp));
 		// find col index
 		var maxCol = aiP[maxRow].indexOf(temp[maxRow]);
-		b[maxRow][maxCol]=(b[maxRow][maxCol]==='' ? ((p.turn = !p.turn) ? 'X':'O') : b[maxRow][maxCol]);
+		// make AI move
+		b[maxRow][maxCol]=(p.turn = !p.turn) ? 'X':'O';
 		aiDemote(maxRow, maxCol);
+		// increase catsCount
+		catsCount += 1;
+	}
+
+	//-------------------------------------------------
+	// AI picks next move
+	//-------------------------------------------------
+	function aiChoice(row, col){
+		var user = $scope.player.piece ? 'O' : 'X';
+		var taken = [];
+		var empty = [];
+		for(var i = 0; i < 3; i++) {
+			if(row != -1) {
+				if($scope.board[row][i] == user)
+					taken.push(i);
+				else if($scope.board[row][i] === '')
+					empty.push(i);
+			}
+			else if(col != -1) {
+				if($scope.board[i][col] == user)
+					taken.push(i);
+				else if($scope.board[i][col] === '')
+					empty.push(i);
+			}
+			
+		}
+		if(empty.length == 1 && taken.length == 2) {
+			if(row != -1)
+				aiPromote(row, empty[0]);
+			else if(col != -1)
+				aiPromote(empty[0], col);
+			
+		}
 	}
 
 	//-------------------------------------------------
@@ -169,11 +209,13 @@ function BoardCtrl($scope) {
 			if(!p.win) {
 				p.win = (b[i][0]==b[i][1] && b[i][1]==b[i][2] && b[i][0]!=='') ? true : false;
 				if(!p.win) {
+					aiChoice(i, -1);
 					// vert win
 					p.win = (b[0][i]==b[1][i] && b[1][i]==b[2][i] && b[0][i]!=='') ? true : false;
 					if(!p.win){
+						aiChoice(-1, i);
+						// diag win
 						if(b[1][1]!==''){
-							// diag win
 							p.win = (b[0][0]==b[1][1] && b[1][1]==b[2][2]) ? true : false;
 							if(!p.win) {
 								p.win = (b[2][0]==b[1][1] && b[1][1]==b[0][2]) ? true : false;
@@ -187,9 +229,8 @@ function BoardCtrl($scope) {
 				else { b[i][0] = 'W'; b[i][1] = b[i][0]; b[i][2] = b[i][1]; }
 			} // end horiz win
 		} // end for loop
-
 		// announce results of game
-		if(p.win) { 
+		if(p.win) {
 			if(g.inProgress){
 				$scope.newGame = 'game?';
 				if(p.turn) {
@@ -210,5 +251,6 @@ function BoardCtrl($scope) {
 				g.inProgress = false;
 			}
 		}
+		console.log('------------------');
 	}	// end checkWin()
 } // end BoardCtrl

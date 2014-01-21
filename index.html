@@ -42,7 +42,6 @@
 			<!-- <div class="images almond"></div> -->
 			<div class="images lav"></div>
 		</div>
-
 		<!-- create board -->
 		<div class="row" x-ng-repeat="row in board track by $index">
 			<div class="cell mouse" x-ng-class="{p0:cell=='X', p1:cell=='O', p0_win:(player.win && player.turn && cell=='W'), p1_win:(player.win && !player.turn && cell=='W')}" x-ng-repeat="cell in row track by $index" x-ng-click="turn($parent.$index, $index);">
