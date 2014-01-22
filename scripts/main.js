@@ -3,6 +3,11 @@
 // display whos turn it is?
 // display text of winner?
 
+// angular.module("TTT",[])
+	// .controller("BoardCtrl", function($scope){
+
+
+
 function BoardCtrl($scope) {
 	// $scope variables
 	$scope.board = [['','',''],['','',''],['','','']];
@@ -162,6 +167,7 @@ function BoardCtrl($scope) {
 		var maxRow = temp.indexOf(Math.max.apply(Math,temp));
 		// find col index
 		var maxCol = aiP[maxRow].indexOf(temp[maxRow]);
+		// var maxCol = aiP[maxRow].indexOf(4);
 		// make AI move
 		b[maxRow][maxCol]=(p.turn = !p.turn) ? 'X':'O';
 		aiDemote(maxRow, maxCol);
@@ -251,6 +257,7 @@ function BoardCtrl($scope) {
 				g.inProgress = false;
 			}
 		}
-		console.log('------------------');
 	}	// end checkWin()
 } // end BoardCtrl
+	// }); // end BoardCtrl
+

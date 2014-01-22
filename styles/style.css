@@ -41,8 +41,6 @@ Game board
 	width: 200px;
 	height: 200px;
 	background-color: rgba(255,255,255,1);
-	/*background-color: black;*/
-	/*background-size: 200px 200px;*/
 	margin-bottom: 3px;
 	margin-right: 3px;
 	float: left;
@@ -51,7 +49,6 @@ Game board
 
 .cell:hover {
 	background-color: rgba(255,255,255,0.8);
-	/*transition: 0.1s;*/
 }
 
 /*-----------------------------------------
@@ -88,7 +85,6 @@ toggle through menu options
 	z-index: 10;
 	top: 0px;
 	left: 0px;
-	/*background-color: rgba(255,255,255,0.5);*/
 }
 
 .menu {
@@ -107,42 +103,9 @@ toggle through menu options
 	transition: 0.2s;
 	-webkit-animation-duration: 3s;
 	-webkit-animation-delay: 0.3s;
-
-	/*0 0*/
-	/*top: 0px;
-	left: 0px;*/
-
-	/*0 1*/
-	/*top: 0px;
-	left: 203px;*/
-
-	/*0 2*/
-	/*top: 0px;
-	left: 406px;*/
-	
-	/*1 0*/
-	/*top: 203px;
-	left: 0px;*/
-
 	/*1 1*/
 	top: 203px;
 	left: 203px;
-	
-	/*1 2*/
-	/*top: 203px;
-	left: 406px;*/
-
-	/*2 0*/
-	/*top: 406px;
-	left: 0px;*/
-
-	/*2 1*/
-	/*top: 406px;
-	left: 203px;*/
-
-	/*2 2*/
-	/*top: 406px;
-	left: 406px;*/
 }
 
 .play:hover {
@@ -152,7 +115,6 @@ toggle through menu options
 
 .select {
 	height: 165px;
-	/*background-color: rgba(150,150,220,1);*/
 	background-color: rgba(0,190,190,1);
 	color: white;
 	padding-top: 35px;
@@ -265,8 +227,6 @@ toggle through menu options
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
 	transition: 0.2s;
-	/*-webkit-animation-duration: 0.5s;
-	-webkit-animation-delay: 0.05s;*/
 	-webkit-animation-delay: 0.2s;
 	-webkit-animation-duration: 1s;
 }
@@ -299,8 +259,6 @@ toggle through menu options
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
 	transition: 0.2s;
-	/*-webkit-animation-delay: 0.2s;
-	-webkit-animation-duration: 1s;*/
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-delay: 0.05s;
 }
@@ -360,31 +318,33 @@ Additional images
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	/*background-color: red;*/
 	z-index: -1;
+	left: 0px;
+	clip: rect(0, 100%, 0, 100%); 
+	overflow: hidden;
 }
 
 .images {
+	/*background:url('../img/macaron_sprite.png');*/
 	position: absolute;
 	width: 180px;
 	height: 180px;
 	z-index: -1;
 }
-
 .spoon {
 	background-image:url('../img/spoon.png');
 	background-size: 650px 414px;
-	bottom: -150px;
-	left: -530px;
+	/*bottom: 0px;*/
+	top: 345px;
+	left: -120px;
 	width: 650px;
 	height: 414px;
 }
-
 .choco {
+	/*background-position: 0 0;*/
 	background-image:url('../img/choco.png');
 	background-size: 180px 180px;
 	top: 400px;
-	left: -420px;
 }
 
 .coffee {
@@ -393,13 +353,8 @@ Additional images
 	width: 210px;
 	height: 210px;
 	top: 80px;
-	left: 750px;
+	left: 1160px;
 	-webkit-transform: rotate(38deg);
-}
-
-.almond {
-	background-image:url('../img/almond.png');
-	background-size: 200px 200px;
 }
 
 .lav {
@@ -408,7 +363,7 @@ Additional images
 	width: 600px;
 	height: 242px;
 	top: 500px;
-	left: 480px;
+	left: 890px;
 	-webkit-transform: rotate(70deg);
 }
 
@@ -461,7 +416,5 @@ Media Queries
 .startGame {
 	height: 135px;
 	padding-top: 25px;
-}
-
 }
 

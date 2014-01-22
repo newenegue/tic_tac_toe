@@ -11,6 +11,13 @@
 	<title>TicTacToe</title>
 </head>
 <body style="font-family: Arial" x-ng-app="">
+	<!-- additional images -->
+	<div class="imgHolder">
+		<div class="images spoon"></div>
+		<div class="images choco"></div>
+		<div class="images coffee"></div>
+		<div class="images lav"></div>
+	</div>
 	<div class="board" x-ng-controller="BoardCtrl">
 
 		<!-- menu -->
@@ -34,14 +41,6 @@
 		<!-- <div class="menu win hide" x-ng-class="{showWin:game.coco_wins}"><b>coconut</b> <span>wins</span></div> -->
 		<!-- <div class="menu win hide" x-ng-class="{showWin:game.hazel_wins}"><b>hazelnut</b> <span>wins</span></div> -->
 
-		<!-- additional images -->
-		<div class="imgHolder">
-			<div class="images spoon"></div>
-			<div class="images choco"></div>
-			<div class="images coffee"></div>
-			<!-- <div class="images almond"></div> -->
-			<div class="images lav"></div>
-		</div>
 		<!-- create board -->
 		<div class="row" x-ng-repeat="row in board track by $index">
 			<div class="cell mouse" x-ng-class="{p0:cell=='X', p1:cell=='O', p0_win:(player.win && player.turn && cell=='W'), p1_win:(player.win && !player.turn && cell=='W')}" x-ng-repeat="cell in row track by $index" x-ng-click="turn($parent.$index, $index);">
