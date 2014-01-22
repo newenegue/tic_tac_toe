@@ -1,11 +1,7 @@
 /*********************************need to work on media queries*********************************/
 
-.cf:before, .cf:after { content: ""; display: table; }
-.cf:after { clear: both; }
-.cf { zoom: 1; }
-
 body {
-	margin-top: 30px;
+	margin-top: 2%;
 }
 
 .mouse {
@@ -26,6 +22,7 @@ Game board
 	margin: 0 auto;
 	background-color: rgba(0,0,0,0.02);	
 	transition: 0.2s;
+	overflow: visible;
 }
 
 .board:hover {
@@ -83,11 +80,9 @@ toggle through menu options
 -----------------------------------------*/
 .overlayMenu {
 	position: absolute;
-	width: 606px;
-	height: 606px;
+	width: 100%;
+	height: 100%;
 	z-index: 10;
-	top: 0px;
-	left: 0px;
 }
 
 .menu {
@@ -100,15 +95,16 @@ toggle through menu options
 }
 
 .play {
-	height: 135px;
+	height: 22%;
 	color: rgba(0,200,200,1);
-	padding-top: 65px;
+	/*padding-top: 65px;*/
+	padding-top: 11%;
 	transition: 0.2s;
 	-webkit-animation-duration: 3s;
 	-webkit-animation-delay: 0.3s;
-	/*1 1*/
-	top: 203px;
-	left: 203px;
+	top: 33.5%;
+	left: 33.5%;
+	/*background-color: red;*/
 }
 
 .play:hover {
@@ -117,34 +113,28 @@ toggle through menu options
 }
 
 .select {
-	height: 165px;
+	height: 27%;
 	background-color: rgba(0,190,190,1);
 	color: white;
-	padding-top: 35px;
+	padding-top: 6%;
 	display: none;
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-delay: 0s;
 }
 
 .game {
-	/*0 1*/
-	top: 0px;
-	left: 203px;
+	left: 33.5%;
 }
 
 .piece {
-	/*0 1*/
-	top: 0px;
-	left: 203px;
+	left: 33.5%;
 }
 
 .singlePlayer {
 	color: rgba(0,200,200,1);
 	background-color: rgba(255,255,255,0.5);
 	transition: 0.2s;
-	/*1 0*/
-	top: 203px;
-	left: 0px;
+	top: 33.5%;
 }
 
 .singlePlayer:hover {
@@ -155,9 +145,8 @@ toggle through menu options
 	color: rgba(0,200,200,1);
 	background-color: rgba(255,255,255,0.5);
 	transition: 0.2s;
-	/*1 2*/
-	top: 203px;
-	left: 406px;
+	top: 33.5%;
+	left: 67%;
 }
 
 .twoPlayer:hover {
@@ -172,9 +161,7 @@ toggle through menu options
 	background-image:url('../img/macaron_sprite.png'); 
 	background-size: 820px 820px;
 	transition: 0.2s;
-	/*1 0*/
-	top: 203px;
-	left: 0px;
+	top: 33.5%;
 }
 
 .piece1:hover {
@@ -190,9 +177,8 @@ toggle through menu options
 	background-size: 820px 820px;
 	background-position: -400px 0px;
 	transition: 0.2s;
-	/*1 2*/
-	top: 203px;
-	left: 406px;
+	top: 33.5%;
+	left: 67%;
 }
 
 .piece2:hover {
@@ -202,11 +188,9 @@ toggle through menu options
 
 .overlaySettings {
 	position: absolute;
-	width: 606px;
-	height: 606px;
+	width: 100%;
+	height: 100%;
 	z-index: 11;
-	top: 0px;
-	left: 0px;
 	background-color: rgba(255,255,255,0.5);
 }
 
@@ -225,8 +209,8 @@ toggle through menu options
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: -198px;
-	top: 150px;
+	left: -30%;
+	top: 25%;
 	text-align: left;
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
@@ -243,22 +227,13 @@ toggle through menu options
 	color: rgba(0,200,200,1);
 }
 
-.dot {
-	text-align: left;
-	color: rgba(0,200,200,1);
-	font-size: 3em;
-	width: 10px;
-	top: 128px;
-	left: -75px;
-}
-
 .newGame {
 	position: absolute;
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: -210px;
-	top: 110px;
+	left: -32%;
+	top: 18%;
 	text-align: left;
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
@@ -276,13 +251,13 @@ toggle through menu options
 }
 
 .draw {
-	height: 135px;
+	height: 22%;
 	color: white;
 	background-color: rgba(0,190,190,1);
-	padding-top: 65px;
+	padding-top: 11%;
 	/*1 1*/
-	top: 203px;
-	left: 203px;
+	top: 33.5%;
+	left: 33.5%;
 	-webkit-animation-duration: 0.05s;
 }
 
@@ -325,7 +300,8 @@ Additional images
 	z-index: -1;
 	left: 0px;
 	clip: rect(0, 100%, 0, 100%); 
-	overflow: hidden;
+	/*overflow: hidden;*/
+	/*margin: 0 auto;*/
 }
 
 .images {
@@ -338,16 +314,19 @@ Additional images
 .spoon {
 	background-size: 1700px 1700px;
 	background-position: -5px -835px;
-	/*bottom: 0px;*/
-	top: 345px;
-	left: -120px;
 	width: 650px;
 	height: 414px;
+	top: 58%;
+	left:-88%;
+	
 }
 .choco {
 	background-size: 800px 800px;
 	background-position: -205px -210px;
-	top: 400px;
+	/*top: 400px;*/
+	top: 65%;
+	/*left: -420px;*/
+	left: -68%;
 }
 
 .coffee {
@@ -355,9 +334,10 @@ Additional images
 	background-position: 0px -220px;
 	width: 210px;
 	height: 210px;
-	top: 80px;
-	left: 1160px;
 	-webkit-transform: rotate(38deg);
+	top: 15%;
+	left: 120%;
+	
 }
 
 .lav {
@@ -365,9 +345,10 @@ Additional images
 	background-position: -395px -490px;
 	width: 600px;
 	height: 242px;
-	top: 500px;
-	left: 890px;
 	-webkit-transform: rotate(70deg);
+	top: 80%;
+	left: 78%;
+	
 }
 
 /*-----------------------------------------
