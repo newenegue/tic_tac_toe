@@ -55,23 +55,26 @@ Game board
 Player pieces
 -----------------------------------------*/
 .p0 {
-	background-image:url('../img/mac0.png');
-	background-size: 200px 200px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
 }
 
 .p1 {
-	background-image:url('../img/mac1.png');
-	background-size: 200px 200px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
+	background-position: -400px 0px;
 }
 
 .p0_win {
-	background-image:url('../img/mac0_win.png');
-	background-size: 200px 200px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
+	background-position: -200px 0px;
 }
 
 .p1_win {
-	background-image:url('../img/mac1_win.png');
-	background-size: 200px 200px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
+	background-position: -600px 0px;
 }
 
 /*-----------------------------------------
@@ -166,8 +169,8 @@ toggle through menu options
 	color: transparent;
 	height: 130px;
 	padding-top: 70px;
-	background-image:url('../img/mac0.png');
-	background-size: 200px 200px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
 	transition: 0.2s;
 	/*1 0*/
 	top: 203px;
@@ -183,8 +186,9 @@ toggle through menu options
 	color: transparent;
 	height: 135px;
 	padding-top: 65px;
-	background-image:url('../img/mac1.png');
-	background-size: 200px 200px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
+	background-position: -400px 0px;
 	transition: 0.2s;
 	/*1 2*/
 	top: 203px;
@@ -325,15 +329,15 @@ Additional images
 }
 
 .images {
-	/*background:url('../img/macaron_sprite.png');*/
+	background-image:url('../img/macaron_sprite.png'); 
 	position: absolute;
 	width: 180px;
 	height: 180px;
 	z-index: -1;
 }
 .spoon {
-	background-image:url('../img/spoon.png');
-	background-size: 650px 414px;
+	background-size: 1700px 1700px;
+	background-position: -5px -835px;
 	/*bottom: 0px;*/
 	top: 345px;
 	left: -120px;
@@ -341,15 +345,14 @@ Additional images
 	height: 414px;
 }
 .choco {
-	/*background-position: 0 0;*/
-	background-image:url('../img/choco.png');
-	background-size: 180px 180px;
+	background-size: 800px 800px;
+	background-position: -205px -210px;
 	top: 400px;
 }
 
 .coffee {
-	background-image:url('../img/coffee.png');
-	background-size: 210px 210px;
+	background-size: 900px 900px;
+	background-position: 0px -220px;
 	width: 210px;
 	height: 210px;
 	top: 80px;
@@ -358,8 +361,8 @@ Additional images
 }
 
 .lav {
-	background-image:url('../img/lav.png');
-	background-size: 600px 242px;
+	background-size: 1000px 1000px;
+	background-position: -395px -490px;
 	width: 600px;
 	height: 242px;
 	top: 500px;
