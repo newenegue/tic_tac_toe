@@ -11,17 +11,11 @@
 	<title>TicTacToe</title>
 </head>
 <body style="font-family: Arial" x-ng-app="">
-	<!-- additional images -->
-	<!-- <div class="imgHolder">
-		<div class="images spoon"></div>
-		<div class="images choco"></div>
-		<div class="images coffee"></div>
-		<div class="images lav"></div>
-	</div> -->
 	<div class="board" x-ng-controller="BoardCtrl">
 
-		<!-- menu -->
+		<!-- overlays -->
 		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:menu.overlay}"></div> 
+		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:menu.settings}"></div> 
 		<!-- play -->
 		<div class="menu mouse play animated fadeIn hide" x-ng-class="{show:menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
 		<!-- select game -->
@@ -34,7 +28,6 @@
 		<div class="menu mouse select piece2 hide" x-ng-class="{show:menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
 		<!-- in game buttons -->
 		<div class="newGame mouse animated fadeInDown hide" x-ng-click="reset()" x-ng-class="{show:menu.newGame,playAgain:(game.draw || player.win)}"><span>new</span> <b>{{newGame}}</b></div>
-		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:menu.settings}"></div> 
 		<div class="settings mouse animated fadeInDown hide" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame,settingsOpen:menu.settings}"><b>{{settings}}</b></div>
 		<!-- game result -->
 		<div class="menu draw animated pulse hide" x-ng-class="{showWin:game.draw}"><b>draw</b></div>

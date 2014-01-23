@@ -1,7 +1,5 @@
-/*********************************need to work on media queries*********************************/
-
 body {
-	margin-top: 2%;
+	margin-top: 30px;
 }
 
 .mouse {
@@ -78,114 +76,14 @@ Player pieces
 Menu overlay on top of board
 toggle through menu options
 -----------------------------------------*/
+
+/*--------overlays---------*/
 .overlayMenu {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	z-index: 10;
 }
-
-.menu {
-	position: absolute;
-	width: 200px;
-	height: 200px;
-	text-align: center;
-	font-family: 'Arvo', serif;
-	font-size: 3em;
-}
-
-.play {
-	height: 22%;
-	color: rgba(0,200,200,1);
-	/*padding-top: 65px;*/
-	padding-top: 11%;
-	transition: 0.2s;
-	-webkit-animation-duration: 3s;
-	-webkit-animation-delay: 0.3s;
-	top: 33.5%;
-	left: 33.5%;
-	/*background-color: red;*/
-}
-
-.play:hover {
-	color: white;
-	background-color: rgba(0,190,190,1);
-}
-
-.select {
-	height: 27%;
-	background-color: rgba(0,190,190,1);
-	color: white;
-	padding-top: 6%;
-	display: none;
-	-webkit-animation-duration: 0.5s;
-	-webkit-animation-delay: 0s;
-}
-
-.game {
-	left: 33.5%;
-}
-
-.piece {
-	left: 33.5%;
-}
-
-.singlePlayer {
-	color: rgba(0,200,200,1);
-	background-color: rgba(255,255,255,0.5);
-	transition: 0.2s;
-	top: 33.5%;
-}
-
-.singlePlayer:hover {
-	color: rgba(255,120,40,1);
-}
-
-.twoPlayer {
-	color: rgba(0,200,200,1);
-	background-color: rgba(255,255,255,0.5);
-	transition: 0.2s;
-	top: 33.5%;
-	left: 67%;
-}
-
-.twoPlayer:hover {
-	color: rgba(255,120,40,1);
-}
-
-.piece1 {
-	font-size: 2em;
-	color: transparent;
-	height: 130px;
-	padding-top: 70px;
-	background-image:url('../img/macaron_sprite.png'); 
-	background-size: 820px 820px;
-	transition: 0.2s;
-	top: 33.5%;
-}
-
-.piece1:hover {
-	color: rgba(0,200,200,1);
-}
-
-.piece2 {
-	font-size: 2em;
-	color: transparent;
-	height: 135px;
-	padding-top: 65px;
-	background-image:url('../img/macaron_sprite.png'); 
-	background-size: 820px 820px;
-	background-position: -400px 0px;
-	transition: 0.2s;
-	top: 33.5%;
-	left: 67%;
-}
-
-.piece2:hover {
-	background-color: rgba(0,220,220,1);
-	color: rgba(0,215,215,1);
-}
-
 .overlaySettings {
 	position: absolute;
 	width: 100%;
@@ -204,13 +102,121 @@ toggle through menu options
 	display: block;
 }
 
+/*--------menu---------*/
+.menu {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	font-family: 'Arvo', serif;
+	font-size: 3em;
+}
+
+/*--------play button---------*/
+.play {
+	height: 135px;
+	color: rgba(0,200,200,1);
+	padding-top: 65px;
+	transition: 0.2s;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-delay: 0.3s;
+	top: 203px;
+	left: 203px;
+}
+
+.play:hover {
+	color: white;
+	background-color: rgba(0,190,190,1);
+}
+
+/*--------menu selection description---------*/
+
+.select {
+	height: 165px;
+	background-color: rgba(0,190,190,1);
+	color: white;
+	padding-top: 35px;
+	display: none;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-delay: 0s;
+}
+
+.game {
+	left: 203px;
+}
+
+.piece {
+	left: 203px;
+}
+
+
+/*--------game mode selection---------*/
+.singlePlayer {
+	color: rgba(0,200,200,1);
+	background-color: rgba(255,255,255,0);
+	transition: 0.2s;
+	top: 203px;
+}
+
+.singlePlayer:hover {
+	color: rgba(255,120,40,1);
+}
+
+.twoPlayer {
+	color: rgba(0,200,200,1);
+	background-color: rgba(255,255,255,0.5);
+	transition: 0.2s;
+	top: 203px;
+	left: 406px;
+}
+
+.twoPlayer:hover {
+	color: rgba(255,120,40,1);
+}
+
+/*--------player piece selection---------*/
+.piece1 {
+	font-size: 2em;
+	color: transparent;
+	height: 130px;
+	padding-top: 70px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
+	transition: 0.2s;
+	top: 203px;
+}
+
+.piece1:hover {
+	color: rgba(0,200,200,1);
+}
+
+.piece2 {
+	font-size: 2em;
+	color: transparent;
+	height: 135px;
+	padding-top: 65px;
+	background-image:url('../img/macaron_sprite.png'); 
+	background-size: 820px 820px;
+	background-position: -400px 0px;
+	transition: 0.2s;
+	top: 203px;
+	left: 406px;
+}
+
+.piece2:hover {
+	background-color: rgba(0,220,220,1);
+	color: rgba(0,215,215,1);
+}
+
+
+/*----------settings button----------*/
 .settings {
 	position: absolute;
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: -30%;
-	top: 25%;
+	left: -180px;
+	top: 150px;
 	text-align: left;
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
@@ -227,13 +233,14 @@ toggle through menu options
 	color: rgba(0,200,200,1);
 }
 
+/*----------new game button----------*/
 .newGame {
 	position: absolute;
 	color: rgba(230,230,230,1);
 	width: 170px;
 	height: 45px;
-	left: -32%;
-	top: 18%;
+	left: -193px;
+	top: 107px;
 	text-align: left;
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
@@ -250,14 +257,15 @@ toggle through menu options
 	color: rgba(0,190,190,1);
 }
 
+
+/*----------game results----------*/
 .draw {
-	height: 22%;
+	height: 135px;
 	color: white;
 	background-color: rgba(0,190,190,1);
-	padding-top: 11%;
-	/*1 1*/
-	top: 33.5%;
-	left: 33.5%;
+	padding-top: 65px;
+	top: 203px;
+	left: 203px;
 	-webkit-animation-duration: 0.05s;
 }
 
@@ -265,7 +273,6 @@ toggle through menu options
 	height: 140px;
 	color: rgba(255,120,40,1);
 	padding-top: 60px;
-	/*1 1*/
 	top: 203px;
 	left: 203px;
 	font-size: 2.2em;
@@ -275,6 +282,7 @@ span {
 	font-size: 0.8em;
 }
 
+/*----------show and hide----------*/
 .hide {
 	z-index: -20;
 	display: none;
@@ -354,51 +362,358 @@ Additional images
 /*-----------------------------------------
 Media Queries
 -----------------------------------------*/
-@media (max-width: 700px) and (min-width: 300px) {
-
-.board {
-	width: 304px;
-	height: 304px;
-	margin-top: 50px;
+/* Landscape phones and down */
+@media (max-width: 568px) {
+body {
+	margin-top: 150px;
 }
-
-.row{
-	width: 306px;
-	height: 100px;
+.board {
+	width: 399px;
+	height: 399px;
+}
+.row {
+	width: 402px;
+	height: 132px;
 }
 
 .cell {
-	width: 100px;
-	height: 100px;
-	margin-right: 2px;
+	width: 132px;
+	height: 132px;
 	margin-bottom: 2px;
+	margin-right: 2px;
 }
 
+.menu {
+	width: 132px;
+	height: 77px;
+	font-size: 2em;
+	/*background-color: rgba(255,0,0,0.2);*/
+}
+
+.play {
+	top: 134px;
+	left: 134px;
+	padding-top: 43px;
+	height: 89px;
+}
+
+.select {
+	left: 134px;
+	height: 110px;
+	padding-top: 22px;
+}
+
+.singlePlayer {
+	top: 134px;
+	left: 0px;
+}
+.twoPlayer {
+	top: 134px;
+	left: 268px;
+	width: 131px;
+}
+.piece1 {
+	font-size: 1.5em;
+	top: 134px;
+	left: 0px;
+	height: 87px;
+	width: 132px;
+	padding-top: 45px;
+	background-size: 630px 630px;
+	background-position: -10px -10px;
+}
+
+.piece2 {
+	font-size: 1.5em;
+	top: 134px;
+	height: 87px;
+	width: 131px;
+	padding-top: 45px;
+	background-size: 630px 630px;
+	background-position: -317px -10px;
+	left: 268px;
+}
 .p0 {
-	background-size: 100px 100px;
+	background-size: 630px 630px;
+	background-position: -10px -10px;
 }
 
 .p1 {
-	background-size: 100px 100px;
+	background-size: 630px 630px;
+	background-position: -317px -10px;
 }
 
 .p0_win {
-	background-size: 100px 100px;
+	background-size: 630px 630px;
+	background-position: -165px -10px;
 }
 
 .p1_win {
-	background-size: 100px 100px;
+	background-size: 630px 630px;
+	background-position: -472px -10px;
+}
+.newGame {
+	width: 170px;
+	height: 45px;
+	left: 75px;
+	top: -115px;
+	font-size: 1.6em;
+	color: rgba(180,180,180,1);
+}
+.playAgain {
+	color: rgba(0,190,190,1);
+}
+.settings {
+	width: 170px;
+	height: 45px;
+	left: 87px;
+	top: -75px;
+	font-size: 1.6em;
+	color: rgba(180,180,180,1);
+}
+.settingsOpen {
+	color: rgba(0,200,200,1);
+}
+.draw {
+	height: 87px;
+	padding-top: 45px;
+	top: 134px;
+	left: 134px;
+}
 }
 
-.overlayCell {
-	width: 100px;
-	margin-bottom: 2px;
-	margin-right: 2px;
-	font-size: 2em;
+/* Landscape phone to portrait tablet */
+@media (min-width: 569px) and (max-width: 899px) {
+body {
+	margin-top: 75px;
+}
+.board {
+	width: 520px;
+	height: 520px;
+}
+.row {
+	width: 525px;
+	height: 172px;
 }
 
-.startGame {
-	height: 135px;
-	padding-top: 25px;
+.cell {
+	width: 172px;
+	height: 172px;
 }
 
+.menu {
+	width: 172px;
+	height: 107px;
+	font-size: 2.6em;
+}
+
+.play {
+	top: 175px;
+	left: 175px;
+	padding-top: 55px;
+	height: 117px;
+}
+
+.select {
+	left: 175px;
+	height: 141px;
+	padding-top: 6%;
+}
+.singlePlayer {
+	top: 175px;
+	left: 0px;
+}
+.twoPlayer {
+	top: 175px;
+	left: 350px;
+	width: 170px;
+}
+.piece1 {
+	font-size: 1.8em;
+	top: 175px;
+	left: 0px;
+	height: 112px;
+	width: 172px;
+	padding-top: 60px;
+	background-size: 740px 740px;
+	background-position: -8px -5px;
+}
+
+.piece2 {
+	font-size: 1.8em;
+	top: 175px;
+	height: 112px;
+	width: 172px;
+	padding-top: 60px;
+	background-size: 740px 740px;
+	background-position: -365px 0px;
+	left: 350px;
+}
+.p0 {
+	background-size: 740px 740px;
+	background-position: -8px -5px;
+}
+
+.p1 {
+	background-size: 740px 740px;
+	background-position: -365px 0px;
+}
+
+.p0_win {
+	background-size: 740px 740px;
+	background-position: -190px 0px;
+}
+
+.p1_win {
+	background-size: 740px 740px;
+	background-position: -548px 0px;
+}
+.newGame {
+	width: 170px;
+	height: 45px;
+	left: 75px;
+	top: -50px;
+	font-size: 1.8em;
+	transition: 0.2s;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-delay: 0.05s;
+	color: rgba(180,180,180,1);
+}
+.playAgain {
+	color: rgba(0,190,190,1);
+}
+.settings {
+	width: 170px;
+	height: 45px;
+	left: 320px;
+	top: -50px;
+	font-size: 1.8em;
+	transition: 0.2s;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-delay: 0.05s;
+	color: rgba(180,180,180,1);
+}
+.settingsOpen {
+	color: rgba(0,200,200,1);
+}
+.draw {
+	height: 116px;
+	padding-top: 56px;
+	top: 175px;
+	left: 175px;
+}
+
+}
+
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 900px) and (max-width: 1050px) {
+body {
+	margin-top: 75px;
+}
+.board {
+	width: 520px;
+	height: 520px;
+}
+.row {
+	width: 525px;
+	height: 172px;
+}
+
+.cell {
+	width: 172px;
+	height: 172px;
+}
+
+.menu {
+	width: 172px;
+	height: 107px;
+	font-size: 2.6em;
+}
+
+.play {
+	top: 175px;
+	left: 175px;
+	padding-top: 55px;
+	height: 117px;
+}
+
+.select {
+	left: 175px;
+	height: 141px;
+	padding-top: 6%;
+}
+.singlePlayer {
+	top: 175px;
+	left: 0px;
+}
+.twoPlayer {
+	top: 175px;
+	left: 350px;
+	width: 170px;
+}
+.piece1 {
+	font-size: 1.8em;
+	top: 175px;
+	left: 0px;
+	height: 112px;
+	width: 172px;
+	padding-top: 60px;
+	background-size: 740px 740px;
+	background-position: -8px -5px;
+}
+
+.piece2 {
+	font-size: 1.8em;
+	top: 175px;
+	height: 112px;
+	width: 172px;
+	padding-top: 60px;
+	background-size: 740px 740px;
+	background-position: -365px 0px;
+	left: 350px;
+}
+.p0 {
+	background-size: 740px 740px;
+	background-position: -8px -5px;
+}
+
+.p1 {
+	background-size: 740px 740px;
+	background-position: -365px 0px;
+}
+
+.p0_win {
+	background-size: 740px 740px;
+	background-position: -190px 0px;
+}
+
+.p1_win {
+	background-size: 740px 740px;
+	background-position: -548px 0px;
+}
+.newGame {
+	width: 170px;
+	height: 45px;
+	left: -170px;
+	top: 90px;
+	font-size: 1.8em;
+}
+.settings {
+	width: 170px;
+	height: 45px;
+	left: -155px;
+	top: 128px;
+	font-size: 1.8em;
+}
+.draw {
+	height: 116px;
+	padding-top: 55px;
+	top: 175px;
+	left: 174px;
+}
+}
+
+/* Large desktop */
+/*@media (min-width: 1200px) {*/
+/*}*/
