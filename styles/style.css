@@ -356,7 +356,6 @@ Additional images
 	-webkit-transform: rotate(70deg);
 	top: 80%;
 	left: 78%;
-	
 }
 
 /*-----------------------------------------
@@ -387,7 +386,6 @@ body {
 	width: 132px;
 	height: 77px;
 	font-size: 2em;
-	/*background-color: rgba(255,0,0,0.2);*/
 }
 
 .play {
@@ -453,9 +451,9 @@ body {
 	background-position: -472px -10px;
 }
 .newGame {
-	width: 170px;
-	height: 45px;
-	left: 75px;
+	width: 140px;
+	height: 33px;
+	left: 120px;
 	top: -115px;
 	font-size: 1.6em;
 	color: rgba(180,180,180,1);
@@ -464,9 +462,9 @@ body {
 	color: rgba(0,190,190,1);
 }
 .settings {
-	width: 170px;
-	height: 45px;
-	left: 87px;
+	width: 130px;
+	height: 33px;
+	left: 131px;
 	top: -75px;
 	font-size: 1.6em;
 	color: rgba(180,180,180,1);
@@ -480,6 +478,32 @@ body {
 	top: 134px;
 	left: 134px;
 }
+.spoon {
+	display: none;
+}
+.lav {
+	display:none;
+}
+.choco {
+	background-size: 550px 550px;
+	background-position: -290px -130px;
+	width: 130px;
+	height: 130px;
+	top: -100px;
+	left: 0px;
+	-webkit-transform: rotate(38deg);
+}
+
+.coffee {
+	background-size: 550px 550px;
+	background-position: 0px -130px;
+	width: 130px;
+	height: 130px;
+	top: -135px;
+	left: 260px;
+}
+
+
 }
 
 /* Landscape phone to portrait tablet */
@@ -603,6 +627,38 @@ body {
 	left: 175px;
 }
 
+.spoon {
+	display: none;
+}
+.choco {
+	background-size: 600px 600px;
+	background-position: -160px -150px;
+	width: 120px;
+	height: 120px;
+	top: 500px;
+	left: -120px;
+}
+
+.coffee {
+	background-size: 670px 670px;
+	background-position: -340px -180px;
+	width: 150px;
+	height: 150px;
+	-webkit-transform: rotate(38deg);
+	top: 70px;
+	left: 510px;
+	
+}
+
+.lav {
+	background-size: 700px 700px;
+	background-position: -290px -350px;
+	width: 400px;
+	height: 150px;
+	-webkit-transform: rotate(30deg);
+	top: 550px;
+	left: 300px;
+}
 }
 
 
@@ -711,6 +767,40 @@ body {
 	padding-top: 55px;
 	top: 175px;
 	left: 174px;
+}
+
+.spoon {
+	background-size: 1400px 1400px;
+	background-position: 30px -680px;
+	top: 300px;
+	left: -460px;
+}
+.choco {
+	background-size: 600px 600px;
+	background-position: -150px -150px;
+	width: 125px;
+	height: 125px;
+	top: 200px;
+	left: -185px;
+}
+
+.coffee {
+	background-size: 720px 720px;
+	background-position: 0px -180px;
+	width: 160px;
+	height: 160px;
+	top: 100px;
+	left: 520px;
+	
+}
+
+.lav {
+	background-size: 850px 850px;
+	background-position: -340px -450px;
+	width: 450px;
+	height: 200px;
+	top: 450px;
+	left: 370px;
 }
 }
 
