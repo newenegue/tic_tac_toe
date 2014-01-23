@@ -9,7 +9,7 @@
 var boardApp = angular.module("BoardApp", []);
 // angular.module("BoardApp", [])
 
-boardApp.controller("BoardCtrl", function($scope, $firebase){
+boardApp.controller("BoardCtrl", function($scope){
 	// .controller("BoardCtrl", function($scope){
 	// $scope variables
 	$scope.board = [['','',''],['','',''],['','','']];
