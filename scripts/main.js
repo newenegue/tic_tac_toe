@@ -6,9 +6,11 @@
 // angular.module("TTT",[])
 	// .controller("BoardCtrl", function($scope){
 
+var boardApp = angular.module("BoardApp", []);
+// angular.module("BoardApp", [])
 
-
-function BoardCtrl($scope) {
+boardApp.controller("BoardCtrl", function($scope, $firebase){
+	// .controller("BoardCtrl", function($scope){
 	// $scope variables
 	$scope.board = [['','',''],['','',''],['','','']];
 	$scope.game = {inProgress:false, draw:false, coco_wins:false, hazel_wins:false, pNum:2, mode:2};
@@ -258,6 +260,5 @@ function BoardCtrl($scope) {
 			}
 		}
 	}	// end checkWin()
-} // end BoardCtrl
-	// }); // end BoardCtrl
+}); // end BoardCtrl
 

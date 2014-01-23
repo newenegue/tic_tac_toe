@@ -6,11 +6,13 @@
 	<link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 	<link rel="stylesheet" type="text/css" href="styles/animate.min.css" />
-	<script type="text/javascript" src="scripts/main.js"></script>
+	<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+	<script type="text/javascript" src="scripts/main.js"></script>
 	<title>TicTacToe</title>
 </head>
-<body style="font-family: Arial" x-ng-app="">
+<body style="font-family: Arial" x-ng-app="BoardApp">
 	<div class="board" x-ng-controller="BoardCtrl">
 
 		<!-- overlays -->
