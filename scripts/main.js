@@ -1,27 +1,85 @@
-// TO DO
-// display which player gets first move?
-// display whos turn it is?
-// display text of winner?
+var boardApp = angular.module("BoardApp", ["firebase"]);
 
-// angular.module("TTT",[])
-	// .controller("BoardCtrl", function($scope){
+boardApp.controller("BoardCtrl", function($scope, $firebase){
+	// Firebase variables
+	var ticTacToeRef = new Firebase("https://ticmactoe.firebaseio.com/");
+	$scope.ticTacToe = $firebase(ticTacToeRef);
 
-var boardApp = angular.module("BoardApp", []);
-// angular.module("BoardApp", [])
+	//====================================================================
+	// Firebase functions
+	//====================================================================	
+	$scope.ticTacToe.$on("loaded", function() {
+		dbItems = $scope.ticTacToe.$getIndex();
+		if(dbItems.length < 1)
+		{
+			$scope.ticTacToe.$add({
+				board: [['','',''],['','',''],['','','']],
+				aiPriority: [[3,2,3],[2,4,2],[3,2,3]],
+				game: {
+					inProgress:false,
+					draw:false,
+					coco_wins:false,
+					hazel_wins:false,
+					pNum:2,
+					mode:2,
+					catsCount:0
+				},
+				player: {
+					turn:false,
+					win:false,
+					piece:false
+				},
+				menu: {
+					overlay:true,
+					play:true,
+					selectGame:false,
+					selectPiece:false,
+					settings:false,
+					newGame:false
+				},
+				newGame: 'game',
+				settings: 'settings'
+			});
 
-boardApp.controller("BoardCtrl", function($scope){
-	// .controller("BoardCtrl", function($scope){
-	// $scope variables
-	$scope.board = [['','',''],['','',''],['','','']];
-	$scope.game = {inProgress:false, draw:false, coco_wins:false, hazel_wins:false, pNum:2, mode:2};
-	$scope.player = {turn:false, win:false, piece:false};
-	$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
-	$scope.menu = {overlay:true, play:true, selectGame:false, selectPiece:false, settings:false, newGame:false};
-	$scope.newGame = 'game';
-	$scope.settings = 'settings';
-
-	// Global variables in BoardCtrl
-	var catsCount = 0;
+			$scope.ticTacToe.$on("change", function() {
+				dbItems = $scope.ticTacToe.$getIndex();
+				$scope.ttt = $scope.ticTacToe.$child(dbItems[0]);
+			});
+		}
+		else
+		{
+			$scope.ttt = $scope.ticTacToe.$child(dbItems[0]);
+			// reset game
+			ticTacToeRef.child(dbItems[0]).update({
+				board: [['','',''],['','',''],['','','']],
+				aiPriority: [[3,2,3],[2,4,2],[3,2,3]],
+				game: {
+					inProgress:false,
+					draw:false,
+					coco_wins:false,
+					hazel_wins:false,
+					pNum:2,
+					mode:2,
+					catsCount:0
+				},
+				player: {
+					turn:false,
+					win:false,
+					piece:false
+				},
+				menu: {
+					overlay:true,
+					play:true,
+					selectGame:false,
+					selectPiece:false,
+					settings:false,
+					newGame:false
+				},
+				newGame: 'game',
+				settings: 'settings'
+			});
+		}
+	});
 
 	//====================================================================
 	// Global $scope functions in BoardCtrl
@@ -31,58 +89,65 @@ boardApp.controller("BoardCtrl", function($scope){
 	// Reset board
 	//-------------------------------------------------
 	$scope.reset = function() {
+		// var b = $scope.ttt.board;
+		// var p = $scope.ttt.player;
+		// var g = $scope.ttt.game;
+		// var m = $scope.ttt.menu;
+		// var aiP = $scope.ttt.aiPriority;
 		// reset only if settings overlay is off
-		if(!$scope.menu.settings){
-			if($scope.player.win){
+		if(!$scope.ttt.menu.settings){
+			if($scope.ttt.player.win){
 				// two player - winner plays first next game
-				if($scope.game.pNum == 2)
-					$scope.player.turn = !$scope.player.turn;
+				if($scope.ttt.game.pNum == 2)
+					$scope.ttt.player.turn = !$scope.ttt.player.turn;
 				// single player - always let user go first
-				else if ($scope.game.pNum == 1) {
-					$scope.player.turn = $scope.player.piece;
+				else if ($scope.ttt.game.pNum == 1) {
+					$scope.ttt.player.turn = $scope.ttt.player.piece;
 				}
 			}
-			$scope.board = [['','',''],['','',''],['','','']];
-			$scope.game.draw = false;
-			$scope.game.coco_wins = false;
-			$scope.game.hazel_wins = false;
-			$scope.game.inProgress = true;
-			$scope.player.win = false;
-			$scope.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
-			$scope.menu.overlay = false;
-			$scope.newGame = 'game';
-			$scope.settings = 'settings';
-			catsCount = 0;
+			$scope.ttt.board = [['','',''],['','',''],['','','']];
+			$scope.ttt.game.draw = false;
+			$scope.ttt.game.coco_wins = false;
+			$scope.ttt.game.hazel_wins = false;
+			$scope.ttt.game.inProgress = true;
+			$scope.ttt.player.win = false;
+			$scope.ttt.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
+			$scope.ttt.menu.overlay = false;
+			$scope.ttt.newGame = 'game';
+			$scope.ttt.settings = 'settings';
+			$scope.ttt.catsCount = 0;
 		}
+		$scope.ttt.$save();
 	};
 
 	//-------------------------------------------------
 	// Display game settings
 	//-------------------------------------------------
 	$scope.openSettings = function() {
-		if(!$scope.menu.settings){
-			$scope.menu = {overlay:true, play:false, selectGame:true, selectPiece:false, settings:true, newGame:true};
-			$scope.settings = 'settings \u2022';
+		if(!$scope.ttt.menu.settings){
+			$scope.ttt.menu = {overlay:true, play:false, selectGame:true, selectPiece:false, settings:true, newGame:true};
+			$scope.ttt.settings = 'settings \u2022';
 			// game mode holder
-			$scope.game.mode = $scope.game.pNum;
+			$scope.ttt.game.mode = $scope.ttt.game.pNum;
 		}
 		else {
-			$scope.menu = {overlay:false, play:false, selectGame:false, selectPiece:false, settings:false, newGame:true};
-			$scope.settings = 'settings';
+			$scope.ttt.menu = {overlay:false, play:false, selectGame:false, selectPiece:false, settings:false, newGame:true};
+			$scope.ttt.settings = 'settings';
 			// keep overlay on if game is over
-			$scope.menu.overlay = !$scope.game.inProgress ? true : false;
+			$scope.ttt.menu.overlay = !$scope.ttt.game.inProgress ? true : false;
 			// set game mode back to in progess game
-			$scope.game.pNum = $scope.game.mode;
+			$scope.ttt.game.pNum = $scope.ttt.game.mode;
 		}
+		$scope.ttt.$save();
 	};
 
 	//-------------------------------------------------
 	// Menu toggle
 	//-------------------------------------------------
 	$scope.switchMenu = function() {
-		var g = $scope.game;
-		var p = $scope.player;
-		var m = $scope.menu;
+		var g = $scope.ttt.game;
+		var p = $scope.ttt.player;
+		var m = $scope.ttt.menu;
 		// initial Play button
 		if(m.play){
 			m.play = !m.play;
@@ -108,6 +173,7 @@ boardApp.controller("BoardCtrl", function($scope){
 				}
 			}
 		}
+		$scope.ttt.$save();
 	};
 
 	//-------------------------------------------------
@@ -115,15 +181,15 @@ boardApp.controller("BoardCtrl", function($scope){
 	//-------------------------------------------------
 	$scope.turn = function(row,col) {
 		// initialize local variables
-		var b = $scope.board;
-		var p = $scope.player;
-		var g = $scope.game;
-		var m = $scope.menu;
-		var aiP = $scope.aiPriority;
+		var b = $scope.ttt.board;
+		var p = $scope.ttt.player;
+		var g = $scope.ttt.game;
+		var m = $scope.ttt.menu;
+		var aiP = $scope.ttt.aiPriority;
 		// AI check for repeat cell clicks
 		var aiTaken = (b[row][col]==='X' || b[row][col]==='O') ? true : false;
 		// track cats game
-		catsCount += (b[row][col]==='') ? 1 : 0;
+		$scope.ttt.catsCount += (b[row][col]==='') ? 1 : 0;
 		// place user piece
 		b[row][col]=(b[row][col]==='' ? ((p.turn = !p.turn) ? 'X':'O') : b[row][col]);
 		// demote cell for AI
@@ -136,6 +202,7 @@ boardApp.controller("BoardCtrl", function($scope){
 			aiTurn(b,p,aiP);
 			checkWin(b,g,p,m);
 		}
+		$scope.ttt.$save();
 	};
 
 	//====================================================================
@@ -146,14 +213,16 @@ boardApp.controller("BoardCtrl", function($scope){
 	// AI cell demotion
 	//-------------------------------------------------
 	function aiDemote(row, col) {
-		$scope.aiPriority[row][col] -= 100;
+		$scope.ttt.aiPriority[row][col] -= 100;
+		$scope.ttt.$save();
 	}
 
 	//-------------------------------------------------
 	// AI cell promotion
 	//-------------------------------------------------
 	function aiPromote(row, col) {
-		$scope.aiPriority[row][col] += 10;
+		$scope.ttt.aiPriority[row][col] += 10;
+		$scope.ttt.$save();
 	}
 
 	//-------------------------------------------------
@@ -174,27 +243,29 @@ boardApp.controller("BoardCtrl", function($scope){
 		b[maxRow][maxCol]=(p.turn = !p.turn) ? 'X':'O';
 		aiDemote(maxRow, maxCol);
 		// increase catsCount
-		catsCount += 1;
+		$scope.ttt.catsCount += 1;
+		$scope.ttt.$save();
 	}
 
 	//-------------------------------------------------
 	// AI picks next move
 	//-------------------------------------------------
 	function aiChoice(row, col){
-		var user = $scope.player.piece ? 'O' : 'X';
+		var user = $scope.ttt.player.piece ? 'O' : 'X';
+		var b = $scope.ttt.board;
 		var taken = [];
 		var empty = [];
 		for(var i = 0; i < 3; i++) {
 			if(row != -1) {
-				if($scope.board[row][i] == user)
+				if(b[row][i] == user)
 					taken.push(i);
-				else if($scope.board[row][i] === '')
+				else if(b[row][i] === '')
 					empty.push(i);
 			}
 			else if(col != -1) {
-				if($scope.board[i][col] == user)
+				if(b[i][col] == user)
 					taken.push(i);
-				else if($scope.board[i][col] === '')
+				else if(b[i][col] === '')
 					empty.push(i);
 			}
 			
@@ -206,6 +277,7 @@ boardApp.controller("BoardCtrl", function($scope){
 				aiPromote(empty[0], col);
 			
 		}
+		$scope.ttt.$save();
 	}
 
 	//-------------------------------------------------
@@ -240,7 +312,7 @@ boardApp.controller("BoardCtrl", function($scope){
 		// announce results of game
 		if(p.win) {
 			if(g.inProgress){
-				$scope.newGame = 'game?';
+				$scope.ttt.newGame = 'game?';
 				if(p.turn) {
 					g.coco_wins = true;
 				}
@@ -251,14 +323,15 @@ boardApp.controller("BoardCtrl", function($scope){
 			m.overlay = true;
 			g.inProgress = false;
 		}
-		else if (catsCount >= 9) {
+		else if ($scope.ttt.catsCount >= 9) {
 			if(g.inProgress) {
 				g.draw = true;
 				m.overlay = true;
-				$scope.newGame = 'game?';
+				$scope.ttt.newGame = 'game?';
 				g.inProgress = false;
 			}
 		}
+		$scope.ttt.$save();
 	}	// end checkWin()
 }); // end BoardCtrl
 

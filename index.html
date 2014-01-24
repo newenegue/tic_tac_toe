@@ -6,33 +6,33 @@
 	<link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 	<link rel="stylesheet" type="text/css" href="styles/animate.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 	<script src="https://cdn.firebase.com/v0/firebase.js"></script>
 	<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
 	<script type="text/javascript" src="scripts/main.js"></script>
-	<title>TicTacToe</title>
+	<title>TicMacToe</title>
 </head>
 <body style="font-family: Arial" x-ng-app="BoardApp">
 	<div class="board" x-ng-controller="BoardCtrl">
 
 		<!-- overlays -->
-		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:menu.overlay}"></div> 
-		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:menu.settings}"></div> 
+		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:ttt.menu.overlay}"></div> 
+		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:ttt.menu.settings}"></div> 
 		<!-- play -->
-		<div class="menu mouse play animated fadeIn hide" x-ng-class="{show:menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
+		<div class="menu mouse play animated fadeIn hide" x-ng-class="{show:ttt.menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
 		<!-- select game -->
-		<div class="menu default select game hide" x-ng-class="{show:menu.selectGame}"><span>select</span> <b>game</b/></div>
-		<div class="menu mouse select singlePlayer hide" x-ng-class="{show:menu.selectGame}" x-ng-click="game.pNum=1; switchMenu()"><b>single</b> <span>player</span></div>
-		<div class="menu mouse select twoPlayer hide" x-ng-class="{show:menu.selectGame}" x-ng-click="game.pNum=2; switchMenu()"><b>two</b> <span>player</span></div>
+		<div class="menu default select game hide" x-ng-class="{show:ttt.menu.selectGame}"><span>select</span> <b>game</b/></div>
+		<div class="menu mouse select singlePlayer hide" x-ng-class="{show:ttt.menu.selectGame}" x-ng-click="ttt.game.pNum=1; switchMenu()"><b>single</b> <span>player</span></div>
+		<div class="menu mouse select twoPlayer hide" x-ng-class="{show:ttt.menu.selectGame}" x-ng-click="ttt.game.pNum=2; switchMenu()"><b>two</b> <span>player</span></div>
 		<!-- select piece -->
-		<div class="menu default select piece hide" x-ng-class="{show:menu.selectPiece}"><span>select</span> <b>piece</b></div>
-		<div class="menu mouse select piece1 hide" x-ng-class="{show:menu.selectPiece}" x-ng-click="player.turn=false; switchMenu();"><b>coconut</b></div>
-		<div class="menu mouse select piece2 hide" x-ng-class="{show:menu.selectPiece}" x-ng-click="player.turn=true; switchMenu();"><b>hazelnut</b></div>
+		<div class="menu default select piece hide" x-ng-class="{show:ttt.menu.selectPiece}"><span>select</span> <b>piece</b></div>
+		<div class="menu mouse select piece1 hide" x-ng-class="{show:ttt.menu.selectPiece}" x-ng-click="ttt.player.turn=false; switchMenu();"><b>coconut</b></div>
+		<div class="menu mouse select piece2 hide" x-ng-class="{show:ttt.menu.selectPiece}" x-ng-click="ttt.player.turn=true; switchMenu();"><b>hazelnut</b></div>
 		<!-- in game buttons -->
-		<div class="newGame mouse animated fadeInDown hide" x-ng-click="reset()" x-ng-class="{show:menu.newGame,playAgain:(game.draw || player.win)}"><span>new</span> <b>{{newGame}}</b></div>
-		<div class="settings mouse animated fadeInDown hide" x-ng-click="openSettings()" x-ng-class="{show:menu.newGame,settingsOpen:menu.settings}"><b>{{settings}}</b></div>
+		<div class="newGame mouse animated fadeInDown hide" x-ng-click="reset()" x-ng-class="{show:ttt.menu.newGame,playAgain:(ttt.game.draw || ttt.player.win)}"><span>new</span> <b>{{ttt.newGame}}</b></div>
+		<div class="settings mouse animated fadeInDown hide" x-ng-click="openSettings()" x-ng-class="{show:ttt.menu.newGame,settingsOpen:ttt.menu.settings}"><b>{{ttt.settings}}</b></div>
 		<!-- game result -->
-		<div class="menu draw animated pulse hide" x-ng-class="{showWin:game.draw}"><b>draw</b></div>
+		<div class="menu draw animated pulse hide" x-ng-class="{showWin:ttt.game.draw}"><b>draw</b></div>
 		<!-- <div class="menu win hide" x-ng-class="{showWin:game.coco_wins}"><b>coconut</b> <span>wins</span></div> -->
 		<!-- <div class="menu win hide" x-ng-class="{showWin:game.hazel_wins}"><b>hazelnut</b> <span>wins</span></div> -->
 
@@ -45,8 +45,8 @@
 		</div>
 
 		<!-- create board -->
-		<div class="row" x-ng-repeat="row in board track by $index">
-			<div class="cell mouse" x-ng-class="{p0:cell=='X', p1:cell=='O', p0_win:(player.win && player.turn && cell=='W'), p1_win:(player.win && !player.turn && cell=='W')}" x-ng-repeat="cell in row track by $index" x-ng-click="turn($parent.$index, $index);">
+		<div class="row" x-ng-repeat="row in ttt.board track by $index">
+			<div class="cell mouse" x-ng-class="{p0:cell=='X', p1:cell=='O', p0_win:(ttt.player.win && ttt.player.turn && cell=='W'), p1_win:(ttt.player.win && !ttt.player.turn && cell=='W')}" x-ng-repeat="cell in row track by $index" x-ng-click="turn($parent.$index, $index);">
 			</div>
 		</div>
 	</div>
