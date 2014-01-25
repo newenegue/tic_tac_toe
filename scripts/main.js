@@ -152,10 +152,10 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		else {
 			// game mode 
 			if(m.selectGame) {
-				if(g.multiMode == 3) {
-					console.log('someone wants to play online!');
-					g.pNum = g.multiMode;
-				}
+				// if(g.multiMode == 3) {
+				// 	console.log('someone wants to play online!');
+				// 	g.pNum = g.multiMode;
+				// }
 				m.selectGame = !m.selectGame;
 				m.selectPiece = !m.selectPiece;
 				// update multiMode in DB
