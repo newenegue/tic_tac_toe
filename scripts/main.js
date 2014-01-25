@@ -24,7 +24,8 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 					pNum:2,
 					mode:2,
 					multiMode:0,
-					catsCount:0
+					catsCount:0,
+					playerSet:0
 				},
 				player: {
 					turn:false,
@@ -61,7 +62,8 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 					pNum:2,
 					mode:2,
 					multiMode:0,
-					catsCount:0
+					catsCount:0,
+					playerSet:0
 				},
 				player: {
 					turn:false,
@@ -112,7 +114,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			$scope.ttt.newGame = 'game';
 			$scope.ttt.settings = 'settings';
 			$scope.ttt.catsCount = 0;
-		}
+		}	
 		dbSave();
 	};
 
@@ -164,7 +166,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			else {
 				// player piece
 				if(m.selectPiece){
-					myPiece = currentPiece();
+					// myPiece = currentPiece();
 					// console.log(myPiece);
 					p.piece = p.turn;
 					m.selectPiece = !m.selectPiece;
@@ -208,6 +210,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		// 	}
 		// }
 		// else if(g.pNum > 2){
+			console.log('myPiece: ' + myPiece);
 			if(isEmpty(row, col) && (initMove() || myTurn())) {
 				placePiece(row, col);
 				aiDemote(row, col);
@@ -232,8 +235,9 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 
 	function initMove() {
 		var initBoard = !$scope.ttt.board.join().match(currentPiece());
-		if(initBoard && myPiece==='') {
+		if(initBoard && myPiece==='' && $scope.ttt.game.playerSet < 2) {
 			myPiece = currentPiece();
+			$scope.ttt.game.playerSet++;
 			return initBoard;
 		}
 		else {
