@@ -90,11 +90,6 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	// Reset board
 	//-------------------------------------------------
 	$scope.reset = function() {
-		// var b = $scope.ttt.board;
-		// var p = $scope.ttt.player;
-		// var g = $scope.ttt.game;
-		// var m = $scope.ttt.menu;
-		// var aiP = $scope.ttt.aiPriority;
 		// reset only if settings overlay is off
 		if(!$scope.ttt.menu.settings){
 			if($scope.ttt.player.win){
@@ -117,9 +112,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			$scope.ttt.newGame = 'game';
 			$scope.ttt.settings = 'settings';
 			$scope.ttt.catsCount = 0;
-			mySymbol = [];
 		}
-		// $scope.ttt.$save();
 		dbSave();
 	};
 
@@ -141,7 +134,6 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			// set game mode back to in progess game
 			$scope.ttt.game.pNum = $scope.ttt.game.mode;
 		}
-		// $scope.ttt.$save();
 		dbSave();
 	};
 
@@ -160,15 +152,20 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		else {
 			// game mode 
 			if(m.selectGame) {
+				if(g.multiMode == 3) {
+					console.log('someone wants to play online!');
+					g.pNum = g.multiMode;
+				}
 				m.selectGame = !m.selectGame;
 				m.selectPiece = !m.selectPiece;
-				// console.log(g.multiMode);
+				// update multiMode in DB
+				// ticTacToeRef.child(dbItems[0]).child('game').child('multiMode').set(3);
 			}
 			else {
 				// player piece
 				if(m.selectPiece){
 					myPiece = currentPiece();
-					console.log(myPiece);
+					// console.log(myPiece);
 					p.piece = p.turn;
 					m.selectPiece = !m.selectPiece;
 					m.overlay = !m.overlay;
@@ -194,29 +191,39 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		var m = $scope.ttt.menu;
 		var aiP = $scope.ttt.aiPriority;
 
-		// if(isEmpty(row,col)){
-		// 	if 2
+		// if(g.pNum <= 2){
+		// 	if(isEmpty(row, col)){// && (initMove() || myTurn())) {
+		// 		placePiece(row, col);
+		// 		aiDemote(row, col);
+		// 		checkWin(b,g,p,m);
 
-		// 		else if 3
+		// 		// AI
+		// 		if(g.pNum == 1 && !p.win){
+		// 			aiTurn(b,p,aiP);
+		// 			checkWin(b,g,p,m);
+		// 		}
+		// 	}
+		// 	else {
+		// 		b[row][col] = b[row][col];
+		// 	}
 		// }
-		// if(g.pNum <= 2 && isEmpty(row, col)) {
-		if(isEmpty(row, col) && (initMove() || myTurn())) {
-			placePiece(row, col);
-			aiDemote(row, col);
-			checkWin(b,g,p,m);
-
-			// AI
-			if(g.pNum == 1 && !p.win){
-				aiTurn(b,p,aiP);
+		// else if(g.pNum > 2){
+			if(isEmpty(row, col) && (initMove() || myTurn())) {
+				placePiece(row, col);
+				aiDemote(row, col);
 				checkWin(b,g,p,m);
+
+				// AI
+				if(g.pNum == 1 && !p.win){
+					aiTurn(b,p,aiP);
+					checkWin(b,g,p,m);
+				}
 			}
-		}
-		else {
-			b[row][col] = b[row][col];
-		}
+			else {
+				b[row][col] = b[row][col];
+			}
+		// }
 		dbSave();
-		// X - true
-		// O - false
 	};
 
 	//====================================================================
@@ -224,10 +231,10 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	//====================================================================
 
 	function initMove() {
-		var t = !$scope.ttt.board.join().match(currentPiece());
-		if(t && myPiece==='') {
+		var initBoard = !$scope.ttt.board.join().match(currentPiece());
+		if(initBoard && myPiece==='') {
 			myPiece = currentPiece();
-			return t;
+			return initBoard;
 		}
 		else {
 			return false;
