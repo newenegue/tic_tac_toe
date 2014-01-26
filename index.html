@@ -13,9 +13,10 @@
 	<title>TicMacToe</title>
 </head>
 <body>
-	<div class="overlayGame overlayGameHide" x-ng-class="{overlayGameShow:lockScreen()}">Game Is On!
+	<div class="overlayGame overlayGameHide" x-ng-class="{overlayGameShow:lockScreen()}">game<br /><b>in progress</b>
 		<div class="invisibleReset overlayGameHide" x-ng-class="{overlayGameShow:lockScreen()}" x-ng-click="dbReset()"></div>
 	</div> 
+	<div class="invisibleReset" x-ng-click="fullReset()"></div>
 	<div class="board">
 		<!-- overlays -->
 		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:ttt.menu.overlay}"></div> 

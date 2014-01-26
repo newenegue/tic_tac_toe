@@ -13,8 +13,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	//====================================================================	
 	$scope.ticTacToe.$on("loaded", function() {
 		dbItems = $scope.ticTacToe.$getIndex();
-		if(dbItems.length < 1)
-		{
+		if(dbItems.length < 1) {
 			$scope.ticTacToe.$add({
 				board: [['','',''],['','',''],['','','']],
 				aiPriority: [[3,2,3],[2,4,2],[3,2,3]],
@@ -24,7 +23,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 					pNum:2,
 					mode:2,
 					catsCount:0,
-					playerSet:false
+					playerSet:0
 				},
 				player: {
 					turn:false,
@@ -48,30 +47,18 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 				$scope.ttt = $scope.ticTacToe.$child(dbItems[0]);
 			});
 		}
-		else
-		{
+		else {
 			$scope.ttt = $scope.ticTacToe.$child(dbItems[0]);
-			// $scope.ttt.menu.play = true;
-			// console.log(ticTacToeRef.child(dbItems[0]).child('game').child('inProgess'));
-			// ticTacToeRef.child(dbItems[0]).child('menu').set({
-			// 		overlay:true,
-			// 		play:true,
-			// 		selectGame:false,
-			// 		selectPiece:false,
-			// 		settings:false,
-			// 		newGame:false
-			// 	});
 		}
 	});
 
+	//-------------------------------------------------
+	// Watch playerSet, when new game mode, reset piece
+	//-------------------------------------------------
 	$scope.$watch("ttt.game.playerSet", function(newVal, oldVal){
 		if(newVal === 0) {
 			$scope.myPiece = '';
-			console.log('Reset myPiece to ' + $scope.myPiece);
 		}
-		console.log('oldVal: ' + oldVal);
-		console.log('newVal: ' + newVal);
-		console.log('----------------------------');
 	});
 
 	//====================================================================
@@ -95,8 +82,6 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			}
 			$scope.ttt.board = [['','',''],['','',''],['','','']];
 			$scope.ttt.game.draw = false;
-			$scope.ttt.game.coco_wins = false;
-			$scope.ttt.game.hazel_wins = false;
 			$scope.ttt.game.inProgress = true;
 			$scope.ttt.player.win = false;
 			$scope.ttt.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
@@ -108,9 +93,31 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		dbSave();
 	};
 
+	//-------------------------------------------------
+	// Reset and allow new players to join
+	//-------------------------------------------------
 	$scope.dbReset = function() {
 		$scope.ttt.game.playerSet = 0;
 		$scope.reset();
+	};
+
+	//-------------------------------------------------
+	// Inivisible full reset
+	//-------------------------------------------------
+	$scope.fullReset = function() {
+		$scope.dbReset();
+		$scope.ttt.game.inProgress = false;
+		$scope.ttt.game.pNum = 2;
+		$scope.ttt.game.mode = 2;
+		$scope.ttt.player.turn = false;
+		$scope.ttt.player.piece = false;
+		$scope.ttt.menu.overlay = true;
+		$scope.ttt.menu.play = true;
+		$scope.ttt.menu.selectGame = false;
+		$scope.ttt.menu.selectPiece = false;
+		$scope.ttt.menu.settings = false;
+		$scope.ttt.menu.newGame = false;
+		dbSave();
 	};
 
 	//-------------------------------------------------
@@ -176,6 +183,16 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	};
 
 	//-------------------------------------------------
+	// Lock screen of additional browsers
+	//-------------------------------------------------
+	$scope.lockScreen = function() {
+		if($scope.myPiece==='' && $scope.ttt.game.playerSet >= $scope.ttt.game.pNum)
+			return true;
+		else
+			return false;
+	};
+
+	//-------------------------------------------------
 	// On click of each cell place piece
 	//-------------------------------------------------
 	$scope.turn = function(row,col) {
@@ -185,11 +202,6 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		var g = $scope.ttt.game;
 		var m = $scope.ttt.menu;
 		var aiP = $scope.ttt.aiPriority;
-		// if($scope.ttt.game.playerSet <= 1){
-			// $scope.myPiece = '';
-		// }
-		console.log('myTurn: ' + myTurn());
-		console.log('playerSet: ' + $scope.ttt.game.playerSet);
 		if(isEmpty(row, col) && (initMove() || myTurn())) {
 			placePiece(row, col);
 			aiDemote(row, col);
@@ -204,30 +216,20 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		else {
 			b[row][col] = b[row][col];
 		}
-		console.log('myPiece: ' + $scope.myPiece);
 		dbSave();
 	};
-
-	$scope.lockScreen = function() {
-		if($scope.myPiece==='' && $scope.ttt.game.playerSet >= $scope.ttt.game.pNum)
-			return true;
-		else
-			return false;
-	};
-
-	$scope.removeLock = function() {
-		
-	}
 
 	//====================================================================
 	// Local functions in BoardCtrl
 	//====================================================================
-
+	
+	//-------------------------------------------------
+	// Initial piece selection by first player(s)
+	//-------------------------------------------------
 	function initMove() {
 		var initBoard = !$scope.ttt.board.join().match(currentPiece());
 		if(initBoard && $scope.myPiece==='' && $scope.ttt.game.playerSet < $scope.ttt.game.pNum) {
 			$scope.myPiece = currentPiece();
-			// $scope.ttt.game.playerSet = true;
 			$scope.ttt.game.playerSet++;
 			return initBoard;
 		}
@@ -236,11 +238,16 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		}
 	}
 
-
+	//-------------------------------------------------
+	// Show current piece
+	//-------------------------------------------------
 	function currentPiece(){
 		return $scope.ttt.player.turn ? 'X':'O';
 	}
 
+	//-------------------------------------------------
+	// Verify turn
+	//-------------------------------------------------
 	function myTurn() {
 		return currentPiece() == $scope.myPiece;
 	}
