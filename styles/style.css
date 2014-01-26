@@ -112,8 +112,8 @@ toggle through menu options
 	text-align: center;
 	font-family: 'Arvo', serif;
 	font-size: 3em;
-	color: rgba(255,255,255,0.75);
-	padding-top: 250px;
+	color: rgba(255,255,255,0.85);
+	padding-top: 20%;
 }
 
 .overlayGameHide {
