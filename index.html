@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html x-ng-app="BoardApp" x-ng-controller="BoardCtrl">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
@@ -12,9 +12,11 @@
 	<script type="text/javascript" src="scripts/main.js"></script>
 	<title>TicMacToe</title>
 </head>
-<body style="font-family: Arial" x-ng-app="BoardApp">
-	<div class="board" x-ng-controller="BoardCtrl">
-
+<body>
+	<div class="overlayGame overlayGameHide" x-ng-class="{overlayGameShow:lockScreen()}">Game Is On!
+		<div class="invisibleReset overlayGameHide" x-ng-class="{overlayGameShow:lockScreen()}" x-ng-click="dbReset()"></div>
+	</div> 
+	<div class="board">
 		<!-- overlays -->
 		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:ttt.menu.overlay}"></div> 
 		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:ttt.menu.settings}"></div> 

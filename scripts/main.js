@@ -6,7 +6,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	$scope.ticTacToe = $firebase(ticTacToeRef);
 
 	// Local Browser, Global Variable holder for selected piece
-	var myPiece='';
+	$scope.myPiece='';
 
 	//====================================================================
 	// Firebase functions
@@ -23,9 +23,8 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 					draw:false,
 					pNum:2,
 					mode:2,
-					multiMode:0,
 					catsCount:0,
-					playerSet:0
+					playerSet:false
 				},
 				player: {
 					turn:false,
@@ -52,36 +51,27 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		else
 		{
 			$scope.ttt = $scope.ticTacToe.$child(dbItems[0]);
-			// reset game
-			ticTacToeRef.child(dbItems[0]).update({
-				board: [['','',''],['','',''],['','','']],
-				aiPriority: [[3,2,3],[2,4,2],[3,2,3]],
-				game: {
-					inProgress:false,
-					draw:false,
-					pNum:2,
-					mode:2,
-					multiMode:0,
-					catsCount:0,
-					playerSet:0
-				},
-				player: {
-					turn:false,
-					win:false,
-					piece:false
-				},
-				menu: {
-					overlay:true,
-					play:true,
-					selectGame:false,
-					selectPiece:false,
-					settings:false,
-					newGame:false
-				},
-				newGame: 'game',
-				settings: 'settings'
-			});
+			// $scope.ttt.menu.play = true;
+			// console.log(ticTacToeRef.child(dbItems[0]).child('game').child('inProgess'));
+			// ticTacToeRef.child(dbItems[0]).child('menu').set({
+			// 		overlay:true,
+			// 		play:true,
+			// 		selectGame:false,
+			// 		selectPiece:false,
+			// 		settings:false,
+			// 		newGame:false
+			// 	});
 		}
+	});
+
+	$scope.$watch("ttt.game.playerSet", function(newVal, oldVal){
+		if(newVal === 0) {
+			$scope.myPiece = '';
+			console.log('Reset myPiece to ' + $scope.myPiece);
+		}
+		console.log('oldVal: ' + oldVal);
+		console.log('newVal: ' + newVal);
+		console.log('----------------------------');
 	});
 
 	//====================================================================
@@ -114,8 +104,13 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			$scope.ttt.newGame = 'game';
 			$scope.ttt.settings = 'settings';
 			$scope.ttt.catsCount = 0;
-		}	
+		}
 		dbSave();
+	};
+
+	$scope.dbReset = function() {
+		$scope.ttt.game.playerSet = 0;
+		$scope.reset();
 	};
 
 	//-------------------------------------------------
@@ -154,10 +149,6 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		else {
 			// game mode 
 			if(m.selectGame) {
-				// if(g.multiMode == 3) {
-				// 	console.log('someone wants to play online!');
-				// 	g.pNum = g.multiMode;
-				// }
 				m.selectGame = !m.selectGame;
 				m.selectPiece = !m.selectPiece;
 				// update multiMode in DB
@@ -166,16 +157,18 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			else {
 				// player piece
 				if(m.selectPiece){
-					// myPiece = currentPiece();
-					// console.log(myPiece);
 					p.piece = p.turn;
 					m.selectPiece = !m.selectPiece;
 					m.overlay = !m.overlay;
 					m.settings = false;
 					m.newGame = true;
-					$scope.reset();
-					if(!g.inProgress)
+					if(!g.inProgress){
 						g.inProgress = true;
+					}
+					else{
+						$scope.dbReset();
+					}
+						
 				}
 			}
 		}
@@ -192,42 +185,39 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		var g = $scope.ttt.game;
 		var m = $scope.ttt.menu;
 		var aiP = $scope.ttt.aiPriority;
-
-		// if(g.pNum <= 2){
-		// 	if(isEmpty(row, col)){// && (initMove() || myTurn())) {
-		// 		placePiece(row, col);
-		// 		aiDemote(row, col);
-		// 		checkWin(b,g,p,m);
-
-		// 		// AI
-		// 		if(g.pNum == 1 && !p.win){
-		// 			aiTurn(b,p,aiP);
-		// 			checkWin(b,g,p,m);
-		// 		}
-		// 	}
-		// 	else {
-		// 		b[row][col] = b[row][col];
-		// 	}
+		// if($scope.ttt.game.playerSet <= 1){
+			// $scope.myPiece = '';
 		// }
-		// else if(g.pNum > 2){
-			console.log('myPiece: ' + myPiece);
-			if(isEmpty(row, col) && (initMove() || myTurn())) {
-				placePiece(row, col);
-				aiDemote(row, col);
+		console.log('myTurn: ' + myTurn());
+		console.log('playerSet: ' + $scope.ttt.game.playerSet);
+		if(isEmpty(row, col) && (initMove() || myTurn())) {
+			placePiece(row, col);
+			aiDemote(row, col);
+			checkWin(b,g,p,m);
+
+			// AI
+			if(g.pNum == 1 && !p.win){
+				aiTurn(b,p,aiP);
 				checkWin(b,g,p,m);
-
-				// AI
-				if(g.pNum == 1 && !p.win){
-					aiTurn(b,p,aiP);
-					checkWin(b,g,p,m);
-				}
 			}
-			else {
-				b[row][col] = b[row][col];
-			}
-		// }
+		}
+		else {
+			b[row][col] = b[row][col];
+		}
+		console.log('myPiece: ' + $scope.myPiece);
 		dbSave();
 	};
+
+	$scope.lockScreen = function() {
+		if($scope.myPiece==='' && $scope.ttt.game.playerSet >= $scope.ttt.game.pNum)
+			return true;
+		else
+			return false;
+	};
+
+	$scope.removeLock = function() {
+		
+	}
 
 	//====================================================================
 	// Local functions in BoardCtrl
@@ -235,8 +225,9 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 
 	function initMove() {
 		var initBoard = !$scope.ttt.board.join().match(currentPiece());
-		if(initBoard && myPiece==='' && $scope.ttt.game.playerSet < 2) {
-			myPiece = currentPiece();
+		if(initBoard && $scope.myPiece==='' && $scope.ttt.game.playerSet < $scope.ttt.game.pNum) {
+			$scope.myPiece = currentPiece();
+			// $scope.ttt.game.playerSet = true;
 			$scope.ttt.game.playerSet++;
 			return initBoard;
 		}
@@ -245,19 +236,19 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		}
 	}
 
+
 	function currentPiece(){
 		return $scope.ttt.player.turn ? 'X':'O';
 	}
 
 	function myTurn() {
-		return currentPiece() == myPiece;
+		return currentPiece() == $scope.myPiece;
 	}
 
 	//-------------------------------------------------
 	// Save to Firebase
 	//-------------------------------------------------
 	function dbSave() {
-		// console.log('trying to save to DB');
 		// if($scope.ttt.game.pNum > 2)
 			$scope.ttt.$save();
 	}
@@ -315,7 +306,6 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		var maxRow = temp.indexOf(Math.max.apply(Math,temp));
 		// find col index
 		var maxCol = aiP[maxRow].indexOf(temp[maxRow]);
-		// make AI move
 		placePiece(maxRow, maxCol);
 		aiDemote(maxRow, maxCol);
 	}
@@ -328,6 +318,8 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		var b = $scope.ttt.board;
 		var taken = [];
 		var empty = [];
+
+		// store all empty and taken cells
 		for(var i = 0; i < 3; i++) {
 			if(row != -1) {
 				if(b[row][i] == user)
@@ -343,6 +335,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 			}
 			
 		}
+		// promote AI if user is about to win
 		if(empty.length == 1 && taken.length == 2) {
 			if(row != -1)
 				aiPromote(row, empty[0]);
