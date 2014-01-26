@@ -7,6 +7,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 
 	// Local Browser, Global Variable holder for selected piece
 	$scope.myPiece='';
+	$scope.showTurn='';
 
 	//====================================================================
 	// Firebase functions
@@ -105,10 +106,14 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	// Inivisible full reset
 	//-------------------------------------------------
 	$scope.fullReset = function() {
-		$scope.dbReset();
+		$scope.ttt.board = [['','',''],['','',''],['','','']];
+		$scope.ttt.aiPriority = [[3,2,3],[2,4,2],[3,2,3]];
 		$scope.ttt.game.inProgress = false;
+		$scope.ttt.game.draw = false;
 		$scope.ttt.game.pNum = 2;
 		$scope.ttt.game.mode = 2;
+		$scope.ttt.game.playerSet = 0;
+		$scope.ttt.player.win = false;
 		$scope.ttt.player.turn = false;
 		$scope.ttt.player.piece = false;
 		$scope.ttt.menu.overlay = true;
@@ -117,6 +122,9 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		$scope.ttt.menu.selectPiece = false;
 		$scope.ttt.menu.settings = false;
 		$scope.ttt.menu.newGame = false;
+		$scope.ttt.newGame = 'game';
+		$scope.ttt.settings = 'settings';
+		$scope.ttt.catsCount = 0;
 		dbSave();
 	};
 
@@ -124,6 +132,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	// Display game settings
 	//-------------------------------------------------
 	$scope.openSettings = function() {
+		console.log('settings is open: ' + $scope.ttt.menu.settings)
 		if(!$scope.ttt.menu.settings){
 			$scope.ttt.menu = {overlay:true, play:false, selectGame:true, selectPiece:false, settings:true, newGame:true};
 			$scope.ttt.settings = 'settings \u2022';
@@ -166,16 +175,13 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 				if(m.selectPiece){
 					p.piece = p.turn;
 					m.selectPiece = !m.selectPiece;
-					m.overlay = !m.overlay;
 					m.settings = false;
 					m.newGame = true;
 					if(!g.inProgress){
 						g.inProgress = true;
 					}
-					else{
-						$scope.dbReset();
-					}
-						
+					$scope.dbReset();
+					$scope.showTurn = 'your move';
 				}
 			}
 		}
@@ -186,10 +192,18 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	// Lock screen of additional browsers
 	//-------------------------------------------------
 	$scope.lockScreen = function() {
-		if($scope.myPiece==='' && $scope.ttt.game.playerSet >= $scope.ttt.game.pNum)
-			return true;
-		else
-			return false;
+		if($scope.ttt.menu.settings){
+			if($scope.myPiece==='' && $scope.ttt.game.playerSet >= $scope.ttt.game.mode)
+				return true;
+			else
+				return false;
+		}
+		else {
+			if($scope.myPiece==='' && $scope.ttt.game.playerSet >= $scope.ttt.game.pNum)
+				return true;
+			else
+				return false;
+		}
 	};
 
 	//-------------------------------------------------
@@ -202,6 +216,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		var g = $scope.ttt.game;
 		var m = $scope.ttt.menu;
 		var aiP = $scope.ttt.aiPriority;
+
 		if(isEmpty(row, col) && (initMove() || myTurn())) {
 			placePiece(row, col);
 			aiDemote(row, col);
