@@ -291,8 +291,8 @@ toggle through menu options
 	font-family: 'Arvo', serif;
 	font-size: 1.8em;
 	transition: 0.2s;
-	-webkit-animation-duration: 0.5s;
 	-webkit-animation-delay: 0.05s;
+	-webkit-animation-duration: 0.5s;
 }
 
 .newGame:hover {
@@ -303,6 +303,19 @@ toggle through menu options
 	color: rgba(0,190,190,1);
 }
 
+/*----------player turn display----------*/
+.turn {
+	font-family: 'Arvo', serif;
+	font-size: 1.8em;	
+	color: rgba(0,200,200,1);
+	transition: 0.3s;
+	position: absolute;
+	left: 620px;
+	top: 107px;
+	width: 200px;
+	-webkit-animation-delay: 0.4s;
+	-webkit-animation-duration: 1s;
+}
 
 /*----------game results----------*/
 .draw {
@@ -408,100 +421,100 @@ Additional images
 Media Queries
 -----------------------------------------*/
 /* Landscape phones and down */
-@media (max-width: 568px) {
+@media (min-width: 320px) and (max-width: 479px) {
 body {
-	margin-top: 150px;
+	margin-top: 90px;
 }
 .board {
-	width: 399px;
-	height: 399px;
+	width: 270px;
+	height: 270px;
 }
 .row {
-	width: 402px;
-	height: 132px;
+	width: 273px;
+	height: 90px;
 }
 
 .cell {
-	width: 132px;
-	height: 132px;
+	width: 89px;
+	height: 89px;
 	margin-bottom: 2px;
 	margin-right: 2px;
 }
 
 .menu {
-	width: 132px;
-	height: 77px;
-	font-size: 2em;
+	width: 89px;
+	height: 89px;
+	font-size: 1.5em;
 }
 
 .play {
-	top: 134px;
-	left: 134px;
-	padding-top: 43px;
-	height: 89px;
+	top: 91px;
+	left: 91px;
+	padding-top: 28px;
+	height: 61px;
 }
 
 .select {
-	left: 134px;
-	height: 110px;
-	padding-top: 22px;
+	left: 91px;
+	height: 74px;
+	padding-top: 15px;
 }
 
 .singlePlayer {
-	top: 134px;
+	top: 91px;
 	left: 0px;
 }
 .twoPlayer {
-	top: 134px;
-	left: 268px;
-	width: 131px;
+	top: 91px;
+	left: 182px;
+	width: 88px;
 }
 .piece1 {
-	font-size: 1.5em;
-	top: 134px;
+	font-size: 1em;
+	top: 91px;
 	left: 0px;
-	height: 87px;
-	width: 132px;
-	padding-top: 45px;
-	background-size: 630px 630px;
-	background-position: -10px -10px;
+	height: 59px;
+	width: 89px;
+	padding-top: 30px;
+	background-size: 420px 420px;
+	background-position: -5px -5px;
 }
 
 .piece2 {
-	font-size: 1.5em;
-	top: 134px;
-	height: 87px;
-	width: 131px;
-	padding-top: 45px;
-	background-size: 630px 630px;
-	background-position: -317px -10px;
-	left: 268px;
+	font-size: 1em;
+	top: 91px;
+	height: 59px;
+	width: 88px;
+	padding-top: 30px;
+	background-size: 420px 420px;
+	background-position: -210px -5px;
+	left: 182px;
 }
 .p0 {
-	background-size: 630px 630px;
-	background-position: -10px -10px;
+	background-size: 420px 420px;
+	background-position: -5px -5px;
 }
 
 .p1 {
-	background-size: 630px 630px;
-	background-position: -317px -10px;
+	background-size: 420px 420px;
+	background-position: -210px -5px;
 }
 
 .p0_win {
-	background-size: 630px 630px;
-	background-position: -165px -10px;
+	background-size: 420px 420px;
+	background-position: -115px -5px;
 }
 
 .p1_win {
-	background-size: 630px 630px;
-	background-position: -472px -10px;
+	background-size: 420px 420px;
+	background-position: -315px -8px;
 }
 .newGame {
 	width: 140px;
 	height: 33px;
-	left: 120px;
-	top: -115px;
-	font-size: 1.6em;
+	left: 5px;
+	top: -85px;
+	font-size: 1.3em;
 	color: rgba(180,180,180,1);
 }
 .playAgain {
@@ -510,13 +523,25 @@ body {
 .settings {
 	width: 130px;
 	height: 33px;
-	left: 131px;
-	top: -75px;
-	font-size: 1.6em;
+	left: 5px;
+	top: -60px;
+	font-size: 1.3em;
 	color: rgba(180,180,180,1);
 }
 .settingsOpen {
 	color: rgba(0,200,200,1);
+}
+.turn {
+	font-family: 'Arvo', serif;
+	font-size: 1.3em;	
+	color: rgba(0,200,200,1);
+	position: absolute;
+	left: 5px;
+	top: -35px;
+	width: 200px;
+	text-align: left;
+	-webkit-animation-duration: 0.8s;
+	-webkit-animation-delay: 0.4s;
 }
 .draw {
 	height: 87px;
@@ -531,25 +556,167 @@ body {
 	display:none;
 }
 .choco {
-	background-size: 550px 550px;
-	background-position: -290px -130px;
-	width: 130px;
-	height: 130px;
-	top: -100px;
-	left: 0px;
-	-webkit-transform: rotate(38deg);
+	display: none;
 }
 
 .coffee {
-	background-size: 550px 550px;
-	background-position: 0px -130px;
-	width: 130px;
-	height: 130px;
-	top: -135px;
-	left: 260px;
+	background-size: 420px 420px;
+	background-position: 0px -100px;
+	width: 100px;
+	height: 100px;
+	top: -90px;
+	left: 180px;
+}
+.overlayGame {
+	font-size: 2em;
+}
 }
 
+@media (min-width: 480px) and (max-width: 568px) {
+body {
+	margin-top: 10px;
+}
+.board {
+	width: 270px;
+	height: 270px;
+	margin-left: 10px;
+}
+.row {
+	width: 273px;
+	height: 90px;
+}
 
+.cell {
+	width: 89px;
+	height: 89px;
+	margin-bottom: 2px;
+	margin-right: 2px;
+}
+
+.menu {
+	width: 89px;
+	height: 89px;
+	font-size: 1.5em;
+}
+
+.play {
+	top: 91px;
+	left: 91px;
+	padding-top: 28px;
+	height: 61px;
+}
+
+.select {
+	left: 91px;
+	height: 74px;
+	padding-top: 15px;
+}
+
+.singlePlayer {
+	top: 91px;
+	left: 0px;
+}
+.twoPlayer {
+	top: 91px;
+	left: 182px;
+	width: 88px;
+}
+.piece1 {
+	font-size: 1em;
+	top: 91px;
+	left: 0px;
+	height: 59px;
+	width: 89px;
+	padding-top: 30px;
+	background-size: 420px 420px;
+	background-position: -5px -5px;
+}
+
+.piece2 {
+	font-size: 1em;
+	top: 91px;
+	height: 59px;
+	width: 88px;
+	padding-top: 30px;
+	background-size: 420px 420px;
+	background-position: -210px -5px;
+	left: 182px;
+}
+.p0 {
+	background-size: 420px 420px;
+	background-position: -5px -5px;
+}
+
+.p1 {
+	background-size: 420px 420px;
+	background-position: -210px -5px;
+}
+
+.p0_win {
+	background-size: 420px 420px;
+	background-position: -115px -5px;
+}
+
+.p1_win {
+	background-size: 420px 420px;
+	background-position: -315px -8px;
+}
+.newGame {
+	width: 140px;
+	height: 33px;
+	left: 300px;
+	top: 20px;
+	font-size: 1.3em;
+	color: rgba(180,180,180,1);
+}
+.playAgain {
+	color: rgba(0,190,190,1);
+}
+.settings {
+	width: 130px;
+	height: 33px;
+	left: 300px;
+	top: 45px;
+	font-size: 1.3em;
+	color: rgba(180,180,180,1);
+}
+.settingsOpen {
+	color: rgba(0,200,200,1);
+}
+.turn {
+	font-family: 'Arvo', serif;
+	font-size: 1.3em;	
+	color: rgba(0,200,200,1);
+	position: absolute;
+	left: 300px;
+	top: 70px;
+	width: 200px;
+	text-align: left;
+	-webkit-animation-duration: 0.8s;
+	-webkit-animation-delay: 0.4s;
+}
+.draw {
+	height: 87px;
+	padding-top: 45px;
+	top: 134px;
+	left: 134px;
+}
+.spoon {
+	display: none;
+}
+.lav {
+	display:none;
+}
+.choco {
+	display: none;
+}
+
+.coffee {
+	display: none;
+}
+.overlayGame {
+	font-size: 2em;
+}
 }
 
 /* Landscape phone to portrait tablet */
@@ -641,7 +808,7 @@ body {
 .newGame {
 	width: 170px;
 	height: 45px;
-	left: 75px;
+	left: 10px;
 	top: -50px;
 	font-size: 1.8em;
 	transition: 0.2s;
@@ -655,7 +822,7 @@ body {
 .settings {
 	width: 170px;
 	height: 45px;
-	left: 320px;
+	left: 380px;
 	top: -50px;
 	font-size: 1.8em;
 	transition: 0.2s;
@@ -665,6 +832,19 @@ body {
 }
 .settingsOpen {
 	color: rgba(0,200,200,1);
+}
+.turn {
+	font-family: 'Arvo', serif;
+	font-size: 1.8em;	
+	color: rgba(0,200,200,1);
+	/*transition: 0.3s;*/
+	position: absolute;
+	left: 160px;
+	top: -50px;
+	width: 200px;
+	text-align: center;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-delay: 0.3s;
 }
 .draw {
 	height: 116px;
@@ -807,6 +987,19 @@ body {
 	left: -155px;
 	top: 128px;
 	font-size: 1.8em;
+}
+.turn {
+	font-family: 'Arvo', serif;
+	font-size: 1.8em;	
+	color: rgba(0,200,200,1);
+	/*transition: 0.3s;*/
+	position: absolute;
+	left: -235px;
+	top: 55px;
+	width: 200px;
+	text-align: right;
+	-webkit-animation-delay: 0s;
+	-webkit-animation-duration: 0.5s;
 }
 .draw {
 	height: 116px;

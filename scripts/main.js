@@ -174,6 +174,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 				// player piece
 				if(m.selectPiece){
 					p.piece = p.turn;
+					$scope.initPiece = p.turn;
 					m.selectPiece = !m.selectPiece;
 					m.settings = false;
 					m.newGame = true;
@@ -217,7 +218,7 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 		var m = $scope.ttt.menu;
 		var aiP = $scope.ttt.aiPriority;
 
-		if(isEmpty(row, col) && (initMove() || myTurn())) {
+		if(isEmpty(row, col) && (initMove() || $scope.myTurn())) {
 			placePiece(row, col);
 			aiDemote(row, col);
 			checkWin(b,g,p,m);
@@ -263,9 +264,20 @@ boardApp.controller("BoardCtrl", function($scope, $firebase){
 	//-------------------------------------------------
 	// Verify turn
 	//-------------------------------------------------
-	function myTurn() {
+	$scope.myTurn = function() {
 		return currentPiece() == $scope.myPiece;
-	}
+	};
+
+	$scope.myInitTurn = function() {
+		if($scope.ttt.game.playerSet === 0){
+			return $scope.ttt.player.turn == $scope.initPiece;
+		}
+		else if($scope.ttt.game.playerSet === 1 && $scope.myPiece === '') {
+			return currentPiece() != $scope.myPiece;
+		}
+		else
+			return currentPiece() == $scope.myPiece;
+	};
 
 	//-------------------------------------------------
 	// Save to Firebase

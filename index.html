@@ -18,9 +18,11 @@
 	</div> 
 	<div class="invisibleReset" x-ng-click="fullReset()"></div>
 	<div class="board">
-		<!-- {{showTurn}} -->
+		<!-- {{lockScreen()}} -->
+		<div class="turn animated fadeInDown" x-ng-class="{show:(myInitTurn() && !lockScreen()) ,hide:(!myInitTurn() || !ttt.game.inProgress || lockScreen())}">your <b>move</b>!</div>
+		<div class="turn animated fadeInDown" x-ng-class="{hide:(myInitTurn() || !ttt.game.inProgress || lockScreen())}">waiting...</div>
 		<!-- overlays -->
-		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:ttt.menu.overlay}"></div> 
+		<div class="overlayMenu overlayHide" x-ng-class="{overlayShow:(ttt.menu.overlay || !myInitTurn())}"></div> 
 		<div class="overlaySettings overlayHide" x-ng-class="{overlayShow:ttt.menu.settings}"></div> 
 		<!-- play -->
 		<div class="menu mouse play animated fadeIn hide" x-ng-class="{show:ttt.menu.play}" x-ng-click="switchMenu()"><b>play</b></div>
@@ -42,9 +44,9 @@
 		<!-- additional images -->
 		<div class="imgHolder">
 			<div class="images spoon"></div>
-			<div class="images choco"></div>
+			<!-- <div class="images choco hide"></div> -->
 			<div class="images coffee"></div>
-			<div class="images lav"></div>
+			<!-- <div class="images lav hide"></div> -->
 		</div>
 
 		<!-- create board -->
